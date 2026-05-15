@@ -3,7 +3,7 @@ import { FaArrowDown } from "react-icons/fa";
 import { HiDownload } from "react-icons/hi";
 
 import kii from "../../assets/images/kiaf4.png";
-import cv from "../../assets/CV/CV-MuhamadRifqiAfriansyah.pdf";
+import cv from "../../assets/cv/CV-MuhamadRifqiAfriansyah.pdf";
 
 function Hero() {
   return (
