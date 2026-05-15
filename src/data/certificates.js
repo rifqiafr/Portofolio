@@ -233,7 +233,7 @@ const certificates = [
     year: "=2024",
 
     images: [
-      "/certificates/deepl.jpg",
+      "/certificates/Deepl.jpg",
     ],
   },
 

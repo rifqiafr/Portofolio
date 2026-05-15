@@ -207,7 +207,7 @@ const projects = [
     title: "Design Flyer",
     category: "Design",
     image:
-      "/img/Design4.png",
+      "/img/design4.png",
 
     description:
       "Desain flyer ini dibuat untuk kebutuhan publikasi kegiatan sosial dan donasi, seperti laporan donasi, open donasi, serta aksi kepedulian terhadap bencana. Visual yang digunakan menyesuaikan suasana kegiatan, mulai dari nuansa islami, kemanusiaan, hingga kepedulian sosial.",
@@ -223,7 +223,7 @@ const projects = [
     title: "Design Banner",
     category: "Design",
     image:
-      "/img/Design3.png",
+      "/img/design3.png",
 
     description:
       "Kumpulan desain banner ini dibuat untuk kebutuhan publikasi kegiatan, promosi acara, dan informasi program. Setiap banner dirancang dengan komposisi visual yang menyesuaikan tema kegiatan, seperti edukasi, perjalanan, workshop, dan study excursion. Desain dibuat agar terlihat profesional, menarik, dan mudah dipahami saat digunakan pada media digital maupun cetak.",
@@ -239,7 +239,7 @@ const projects = [
     title: "Design Pamflet",
     category: "Design",
     image:
-      "/img/Design2.png",
+      "/img/design2.png",
 
     description:
       "Desain pamflet ini dibuat untuk kebutuhan promosi kegiatan National Ercom Competition 2023, seperti lomba ajang inovasi kreativitas, lomba karya tulis ilmiah nasional, dan informasi pendaftaran kegiatan. Desain menampilkan informasi penting secara jelas, mulai dari tema, timeline, biaya pendaftaran, hadiah, hingga kontak panitia dengan layout yang informatif dan mudah dibaca.",
@@ -255,7 +255,7 @@ const projects = [
     title: "Design Sertifikat",
     category: "Design",
     image:
-      "/img/Design1.png",
+      "/img/design1.png",
 
     description:
       "Kumpulan desain sertifikat ini dibuat untuk berbagai kegiatan organisasi dan kepanitiaan, seperti study banding, study excursion, penghargaan anggota departemen, dan sertifikat kepengurusan. Desain dibuat dengan tampilan formal, rapi, dan tetap menari",
