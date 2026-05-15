@@ -1,0 +1,6 @@
+allowBuilds:
+  '@tsparticles/engine': true
+  core-js: false
+  electron: set this to true or false
+  react-tsparticles: true
+  tsparticles-engine: true
