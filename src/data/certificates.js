@@ -155,6 +155,7 @@ const certificates = [
 
     images: [
       "/certificates/SertifikasiSosmed.jpg",
+      "/certificates/SertifikatSosmed2.jpg",
     ],
   },
 

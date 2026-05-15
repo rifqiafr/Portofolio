@@ -292,7 +292,7 @@ function Hero() {
               </a>
 
               <a
-                href="/cv/CV-MuhamadRifqiAfriansyah.pdf"
+                href="/cv/CV-MuhamadRifqiAfriansyah-04.pdf"
                 download
                 className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-2xl bg-cyan-500 px-8 py-4 font-semibold text-white transition duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/30 sm:w-auto"
               >
