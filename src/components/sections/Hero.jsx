@@ -3,7 +3,6 @@ import { FaArrowDown } from "react-icons/fa";
 import { HiDownload } from "react-icons/hi";
 
 import kii from "../../assets/images/kiaf4.png";
-import cv from "../../assets/cv/CV-MuhamadRifqiAfriansyah.pdf";
 
 function Hero() {
   return (
@@ -293,7 +292,7 @@ function Hero() {
               </a>
 
               <a
-                href={cv}
+                href="/cv/CV-MuhamadRifqiAfriansyah.pdf"
                 download
                 className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-2xl bg-cyan-500 px-8 py-4 font-semibold text-white transition duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/30 sm:w-auto"
               >
