@@ -74,12 +74,11 @@ function Contact() {
             viewport={{ once: true }}
           >
             <h3 className="text-3xl font-bold leading-snug text-gray-900 dark:text-white">
-              Let’s Work Together
+              Siap untuk Bekerja Sama
             </h3>
 
             <p className="text-gray-600 dark:text-gray-300 leading-8 mt-6">
-              Feel free to contact me for collaboration, freelance projects, or
-              just to say hello.
+              Jangan ragu untuk menghubungi saya untuk kolaborasi, proyek freelance, atau sekadar menyapa.
             </p>
 
             <div className="flex flex-col gap-6 mt-10">
@@ -200,13 +199,13 @@ function Contact() {
 
             {success && (
               <p className="mt-5 text-green-600 font-semibold">
-                Message sent successfully!
+                Pesan Anda berhasil dikirim.
               </p>
             )}
 
             {error && (
               <p className="mt-5 text-red-500 font-semibold">
-                Failed to send message. Please try again.
+                Gagal mengirim pesan. Silakan coba lagi.
               </p>
             )}
           </motion.form>
