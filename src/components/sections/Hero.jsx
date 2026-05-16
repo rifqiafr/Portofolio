@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { FaArrowDown } from "react-icons/fa";
 import { HiDownload } from "react-icons/hi";
 
-import kii from "../../assets/images/kiaf4.png";
+import kii from "../../assets/images/kiaf4.webp";
 
 function Hero() {
   return (
