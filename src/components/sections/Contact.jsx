@@ -183,7 +183,7 @@ function Contact() {
               <input
                 type="text"
                 name="user_name"
-                placeholder="Your Name"
+                placeholder="Nama"
                 required
                 className="border border-gray-200 dark:border-white/10 bg-transparent rounded-2xl px-5 py-4 outline-none focus:border-[#023E8A] text-gray-900 dark:text-white"
               />
@@ -191,7 +191,7 @@ function Contact() {
               <input
                 type="email"
                 name="user_email"
-                placeholder="Your Email"
+                placeholder="Email"
                 required
                 className="border border-gray-200 dark:border-white/10 bg-transparent rounded-2xl px-5 py-4 outline-none focus:border-[#023E8A] text-gray-900 dark:text-white"
               />
@@ -199,7 +199,7 @@ function Contact() {
               <input
                 type="text"
                 name="title"
-                placeholder="Message Title"
+                placeholder="Judul Pesan"
                 required
                 className="border border-gray-200 dark:border-white/10 bg-transparent rounded-2xl px-5 py-4 outline-none focus:border-[#023E8A] text-gray-900 dark:text-white"
               />
@@ -209,7 +209,7 @@ function Contact() {
               <textarea
                 name="message"
                 rows="6"
-                placeholder="Your Message"
+                placeholder="Pesan"
                 required
                 className="border border-gray-200 dark:border-white/10 bg-transparent rounded-2xl px-5 py-4 outline-none focus:border-[#023E8A] resize-none text-gray-900 dark:text-white"
               ></textarea>
