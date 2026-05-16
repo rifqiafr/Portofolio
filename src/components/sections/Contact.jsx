@@ -18,9 +18,7 @@ function Contact() {
   const formRef = useRef(null);
 
   const [loading, setLoading] = useState(false);
-
   const [success, setSuccess] = useState(false);
-
   const [error, setError] = useState(false);
 
   const sendEmail = (e) => {
@@ -29,6 +27,23 @@ function Contact() {
     setLoading(true);
     setSuccess(false);
     setError(false);
+
+    const now = new Date();
+
+    const formattedTime = now.toLocaleString("id-ID", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+
+    const timeInput = formRef.current.querySelector('input[name="time"]');
+
+    if (timeInput) {
+      timeInput.value = formattedTime;
+    }
 
     emailjs
       .sendForm("service_ulq0nvr", "template_34rlvaq", formRef.current, {
@@ -78,7 +93,8 @@ function Contact() {
             </h3>
 
             <p className="text-gray-600 dark:text-gray-300 leading-8 mt-6">
-              Jangan ragu untuk menghubungi saya untuk kolaborasi, proyek freelance, atau sekadar menyapa.
+              Jangan ragu untuk menghubungi saya untuk kolaborasi, proyek
+              freelance, atau sekadar menyapa.
             </p>
 
             <div className="flex flex-col gap-6 mt-10">
@@ -179,6 +195,16 @@ function Contact() {
                 required
                 className="border border-gray-200 dark:border-white/10 bg-transparent rounded-2xl px-5 py-4 outline-none focus:border-[#023E8A] text-gray-900 dark:text-white"
               />
+
+              <input
+                type="text"
+                name="title"
+                placeholder="Message Title"
+                required
+                className="border border-gray-200 dark:border-white/10 bg-transparent rounded-2xl px-5 py-4 outline-none focus:border-[#023E8A] text-gray-900 dark:text-white"
+              />
+
+              <input type="hidden" name="time" />
 
               <textarea
                 name="message"
