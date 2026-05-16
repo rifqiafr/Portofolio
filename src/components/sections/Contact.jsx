@@ -118,7 +118,7 @@ function Contact() {
 
             <div className="mt-12 flex items-center gap-5 flex-wrap">
               <a
-                href="https://github.com/USERNAME"
+                href="https://github.com/rifqiafr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cursor-pointer w-14 h-14 rounded-2xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center text-gray-700 dark:text-white text-2xl hover:bg-[#023E8A] hover:text-white hover:-translate-y-2 transition duration-300 shadow-lg"
@@ -127,7 +127,7 @@ function Contact() {
               </a>
 
               <a
-                href="https://linkedin.com/in/USERNAME"
+                href="https://linkedin.com/in/mrifqiaf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cursor-pointer w-14 h-14 rounded-2xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center text-gray-700 dark:text-white text-2xl hover:bg-[#0077B5] hover:text-white hover:-translate-y-2 transition duration-300 shadow-lg"
@@ -136,7 +136,7 @@ function Contact() {
               </a>
 
               <a
-                href="https://instagram.com/USERNAME"
+                href="https://instagram.com/rifqiafrnsyah"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cursor-pointer w-14 h-14 rounded-2xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center text-gray-700 dark:text-white text-2xl hover:bg-pink-500 hover:text-white hover:-translate-y-2 transition duration-300 shadow-lg"
