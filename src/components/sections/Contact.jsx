@@ -110,7 +110,7 @@ function Contact() {
                   </h4>
 
                   <p className="text-gray-600 dark:text-gray-300">
-                    +62 8123456789
+                    +62 82374233385
                   </p>
                 </div>
               </div>
