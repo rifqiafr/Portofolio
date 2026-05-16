@@ -220,7 +220,7 @@ function Contact() {
               disabled={loading}
               className="cursor-pointer mt-8 bg-[#023E8A] text-white px-8 py-4 rounded-full hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition duration-300 shadow-lg disabled:opacity-60"
             >
-              {loading ? "Sending..." : "Send Message"}
+              {loading ? "Sending..." : "Kirim Pesan"}
             </button>
 
             {success && (
