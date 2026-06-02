@@ -151,62 +151,116 @@ function Certificates() {
             <button
               disabled={isBeginning || totalSlides <= 1}
               className={`
-                certificate-prev
-                cursor-pointer
-                w-14
-                h-14
-                rounded-2xl
-                bg-white
-                dark:bg-white/5
-                border
-                border-gray-200
-                dark:border-white/10
-                flex
-                items-center
-                justify-center
-                text-xl
-                shadow-lg
-                transition-all
-                duration-300
-                ${
-                  isBeginning || totalSlides <= 1
-                    ? "text-gray-400 opacity-50 cursor-not-allowed"
-                    : "text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#023E8A]/30"
-                }
-              `}
+        certificate-prev
+        relative
+        overflow-hidden
+        w-12 md:w-14
+        h-12 md:h-14
+        rounded-2xl
+        border
+        border-gray-200
+        dark:border-white/10
+        flex
+        items-center
+        justify-center
+        text-lg
+        md:text-xl
+        shadow-lg
+        transition-all
+        duration-300
+        before:absolute
+        before:inset-0
+        before:bg-white/10
+        before:opacity-0
+        before:transition
+        before:duration-300
+        active:before:opacity-100
+        ${
+          isBeginning || totalSlides <= 1
+            ? `
+              bg-gray-100
+              dark:bg-white/5
+              text-gray-400
+              opacity-50
+              cursor-not-allowed
+              pointer-events-none
+            `
+            : `
+              cursor-pointer
+              bg-white
+              dark:bg-white/5
+              text-gray-700
+              dark:text-white
+              hover:bg-[#023E8A]
+              hover:text-white
+              hover:-translate-y-1
+              hover:shadow-2xl
+              hover:shadow-[#023E8A]/30
+              active:scale-90
+              active:bg-[#012f6b]
+            `
+        }
+      `}
             >
-              <FaArrowLeft />
+              <FaArrowLeft className="relative z-10 transition-transform duration-200 active:scale-75" />
             </button>
 
             {/* NEXT */}
             <button
               disabled={isEnd || totalSlides <= 1}
               className={`
-                certificate-next
-                cursor-pointer
-                w-14
-                h-14
-                rounded-2xl
-                bg-white
-                dark:bg-white/5
-                border
-                border-gray-200
-                dark:border-white/10
-                flex
-                items-center
-                justify-center
-                text-xl
-                shadow-lg
-                transition-all
-                duration-300
-                ${
-                  isEnd || totalSlides <= 1
-                    ? "text-gray-400 opacity-50 cursor-not-allowed"
-                    : "text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#023E8A]/30"
-                }
-              `}
+        certificate-next
+        relative
+        overflow-hidden
+        w-12 md:w-14
+        h-12 md:h-14
+        rounded-2xl
+        border
+        border-gray-200
+        dark:border-white/10
+        flex
+        items-center
+        justify-center
+        text-lg
+        md:text-xl
+        shadow-lg
+        transition-all
+        duration-300
+        before:absolute
+        before:inset-0
+        before:bg-white/10
+        before:opacity-0
+        before:transition
+        before:duration-300
+        active:before:opacity-100
+        ${
+          isEnd || totalSlides <= 1
+            ? `
+              bg-gray-100
+              dark:bg-white/5
+              text-gray-400
+              opacity-50
+              cursor-not-allowed
+              pointer-events-none
+            `
+            : `
+              cursor-pointer
+              bg-white
+              dark:bg-white/5
+              text-gray-700
+              dark:text-white
+              hover:bg-[#023E8A]
+              hover:text-white
+              hover:-translate-y-1
+              hover:shadow-2xl
+              hover:shadow-[#023E8A]/30
+              active:scale-90
+              active:bg-[#012f6b]
+            `
+        }
+      `}
             >
-              <FaArrowRight />
+              <FaArrowRight className="relative z-10 transition-transform duration-200 active:scale-75" />
             </button>
           </div>
         </div>
@@ -233,7 +287,7 @@ function Certificates() {
             }).map((_, groupIndex) => {
               const group = certificates.slice(
                 groupIndex * 8,
-                groupIndex * 8 + 8
+                groupIndex * 8 + 8,
               );
 
               return (
@@ -500,9 +554,7 @@ function Certificates() {
                       style={{
                         transform: `translate3d(${position.x}px, ${position.y}px, 0) scale(${zoom})`,
                         transformOrigin: "center center",
-                        transition: isDragging
-                          ? "none"
-                          : "transform 0.2s ease",
+                        transition: isDragging ? "none" : "transform 0.2s ease",
                       }}
                     />
                   </div>

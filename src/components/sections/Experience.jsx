@@ -1,11 +1,8 @@
 // src/components/sections/Experience.jsx
 
-import { useState } from "react";
-
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import { Navigation, Autoplay } from "swiper/modules";
 
 import {
@@ -19,19 +16,17 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import experiences from "../../data/experiences";
-
 import SectionTitle from "../ui/SectionTitle";
 
 function Experience() {
   const [selectedExperience, setSelectedExperience] = useState(null);
-
   const [activeTab, setActiveTab] = useState("work");
-
   const [isBeginning, setIsBeginning] = useState(true);
-
   const [isEnd, setIsEnd] = useState(false);
 
-  // FILTER
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+
   const filteredExperiences = experiences.filter(
     (item) => item.category === activeTab
   );
@@ -58,7 +53,6 @@ function Experience() {
 
         {/* TAB BUTTON */}
         <div className="flex items-center justify-center gap-5 mt-14 flex-wrap">
-          {/* WORK */}
           <button
             onClick={() => handleTabChange("work")}
             className={`cursor-pointer flex items-center gap-3 px-7 py-3 rounded-2xl transition duration-300 ${
@@ -71,7 +65,6 @@ function Experience() {
             Pengalaman Kerja
           </button>
 
-          {/* ORGANIZATION */}
           <button
             onClick={() => handleTabChange("organization")}
             className={`cursor-pointer flex items-center gap-3 px-7 py-3 rounded-2xl transition duration-300 ${
@@ -90,29 +83,22 @@ function Experience() {
           <div className="flex items-center gap-4">
             {/* PREV */}
             <button
-              disabled={isBeginning}
+              ref={prevRef}
+              disabled={isBeginning || filteredExperiences.length <= 1}
               className={`
-                experience-prev
-                cursor-pointer
-                w-14
-                h-14
+                w-12 md:w-14
+                h-12 md:h-14
                 rounded-2xl
-                bg-white
-                dark:bg-white/5
-                border
-                border-gray-200
-                dark:border-white/10
-                flex
-                items-center
-                justify-center
-                text-xl
+                bg-white dark:bg-white/5
+                border border-gray-200 dark:border-white/10
+                flex items-center justify-center
+                text-lg md:text-xl
                 shadow-lg
-                transition-all
-                duration-300
+                transition-all duration-200
                 ${
-                  isBeginning
-                    ? "text-gray-400 opacity-50 cursor-not-allowed"
-                    : "text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#023E8A]/30"
+                  isBeginning || filteredExperiences.length <= 1
+                    ? "text-gray-400 opacity-50 cursor-not-allowed pointer-events-none"
+                    : "cursor-pointer text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#023E8A]/30 active:scale-90 active:bg-[#023E8A] active:text-white"
                 }
               `}
             >
@@ -121,29 +107,22 @@ function Experience() {
 
             {/* NEXT */}
             <button
-              disabled={isEnd}
+              ref={nextRef}
+              disabled={isEnd || filteredExperiences.length <= 1}
               className={`
-                experience-next
-                cursor-pointer
-                w-14
-                h-14
+                w-12 md:w-14
+                h-12 md:h-14
                 rounded-2xl
-                bg-white
-                dark:bg-white/5
-                border
-                border-gray-200
-                dark:border-white/10
-                flex
-                items-center
-                justify-center
-                text-xl
+                bg-white dark:bg-white/5
+                border border-gray-200 dark:border-white/10
+                flex items-center justify-center
+                text-lg md:text-xl
                 shadow-lg
-                transition-all
-                duration-300
+                transition-all duration-200
                 ${
-                  isEnd
-                    ? "text-gray-400 opacity-50 cursor-not-allowed"
-                    : "text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#023E8A]/30"
+                  isEnd || filteredExperiences.length <= 1
+                    ? "text-gray-400 opacity-50 cursor-not-allowed pointer-events-none"
+                    : "cursor-pointer text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#023E8A]/30 active:scale-90 active:bg-[#023E8A] active:text-white"
                 }
               `}
             >
@@ -153,13 +132,18 @@ function Experience() {
         </div>
 
         {/* EXPERIENCE SLIDER */}
-        <div>
+        <div className="w-full overflow-hidden">
           <Swiper
             key={activeTab}
             modules={[Navigation]}
+            slidesPerView={1}
             navigation={{
-              nextEl: ".experience-next",
-              prevEl: ".experience-prev",
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }}
+            onBeforeInit={(swiper) => {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
             }}
             loop={false}
             speed={1000}
@@ -179,10 +163,10 @@ function Experience() {
                 slidesPerView: 3,
               },
             }}
-            className="pb-10"
+            className="pb-10 overflow-hidden"
           >
             {filteredExperiences.map((item, index) => (
-              <SwiperSlide key={index} className="h-auto">
+              <SwiperSlide key={index} className="!h-auto">
                 <motion.div
                   initial={{
                     opacity: 0,
@@ -238,20 +222,17 @@ function Experience() {
                       ))}
                     </Swiper>
 
-                    {/* OVERLAY */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   </div>
 
                   {/* CONTENT */}
-                  <div className="p-7 h-[470px] flex flex-col">
-                    {/* YEAR */}
+                  <div className="p-5 md:p-7 h-auto md:h-[470px] flex flex-col">
                     <span className="w-fit px-4 py-1 rounded-full bg-[#023E8A]/10 text-[#023E8A] text-sm font-medium">
                       {item.year}
                     </span>
 
-                    {/* TITLE */}
                     <h3
-                      className="text-2xl font-black mt-5 text-gray-900 dark:text-white leading-snug overflow-hidden"
+                      className="text-xl md:text-2xl font-black mt-5 text-gray-900 dark:text-white leading-snug overflow-hidden"
                       style={{
                         display: "-webkit-box",
                         WebkitLineClamp: 2,
@@ -261,12 +242,10 @@ function Experience() {
                       {item.title}
                     </h3>
 
-                    {/* COMPANY */}
                     <p className="mt-2 text-[#023E8A] font-semibold truncate">
                       {item.company}
                     </p>
 
-                    {/* DESC */}
                     <div className="mt-5 mb-6 h-[112px] overflow-hidden">
                       <p
                         className="text-gray-600 dark:text-gray-300 overflow-hidden"
@@ -282,10 +261,8 @@ function Experience() {
                       </p>
                     </div>
 
-                    {/* SPACER */}
                     <div className="flex-1" />
 
-                    {/* TECH */}
                     <div className="pt-3 h-[58px] overflow-hidden">
                       <div className="flex flex-nowrap gap-2 overflow-hidden">
                         {item.tech?.slice(0, 2).map((tech, techIndex) => (
@@ -316,10 +293,23 @@ function Experience() {
                       </div>
                     </div>
 
-                    {/* BUTTON */}
                     <button
                       onClick={() => setSelectedExperience(item)}
-                      className="cursor-pointer mt-6 w-full py-4 rounded-2xl bg-[#023E8A] text-white font-semibold hover:scale-[1.02] transition duration-300"
+                      className="
+                        cursor-pointer
+                        mt-6
+                        w-full
+                        py-4
+                        rounded-2xl
+                        bg-[#023E8A]
+                        text-white
+                        font-semibold
+                        transition-all
+                        duration-300
+                        hover:scale-[1.02]
+                        active:scale-95
+                        active:bg-[#012f6b]
+                      "
                     >
                       View Details
                     </button>
@@ -331,16 +321,14 @@ function Experience() {
         </div>
       </div>
 
-      {/* MODAL DI LUAR WRAPPER z-10 */}
+      {/* MODAL */}
       {selectedExperience && (
         <div className="fixed inset-0 z-[999999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-5">
-          {/* BACKDROP */}
           <div
             onClick={() => setSelectedExperience(null)}
             className="absolute inset-0"
           />
 
-          {/* MODAL CONTENT */}
           <motion.div
             initial={{
               opacity: 0,
@@ -371,7 +359,6 @@ function Experience() {
               shadow-2xl
             "
           >
-            {/* CLOSE BUTTON */}
             <button
               onClick={() => setSelectedExperience(null)}
               className="
@@ -396,7 +383,6 @@ function Experience() {
               ×
             </button>
 
-            {/* IMAGE SLIDER */}
             <div className="relative p-4 md:p-5 bg-gray-50 dark:bg-white/[0.03]">
               <div className="relative overflow-hidden rounded-2xl shadow-xl bg-gray-100 dark:bg-white/5">
                 <Swiper
@@ -421,34 +407,27 @@ function Experience() {
                   ))}
                 </Swiper>
 
-                {/* SOFT OVERLAY */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
               </div>
             </div>
 
-            {/* MODAL BODY */}
             <div className="p-7 md:p-8">
-              {/* YEAR */}
               <span className="inline-block px-5 py-2 rounded-full bg-[#023E8A]/10 text-[#023E8A] text-sm font-semibold">
                 {selectedExperience.year}
               </span>
 
-              {/* TITLE */}
               <h2 className="mt-5 text-2xl md:text-3xl font-black text-gray-900 dark:text-white leading-tight">
                 {selectedExperience.title}
               </h2>
 
-              {/* COMPANY */}
               <p className="mt-3 text-[#023E8A] font-bold text-lg">
                 {selectedExperience.company}
               </p>
 
-              {/* DESCRIPTION FULL */}
               <p className="mt-5 text-gray-600 dark:text-gray-300 leading-8 text-base md:text-lg">
                 {selectedExperience.description}
               </p>
 
-              {/* TECH MODAL */}
               {selectedExperience.tech?.length > 0 && (
                 <div className="mt-7">
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
