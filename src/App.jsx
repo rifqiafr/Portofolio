@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-
 import { AnimatePresence } from "framer-motion";
+import { Analytics } from "@vercel/analytics/react";
 
 import Navbar from "./components/layout/Navbar";
 
@@ -16,8 +16,7 @@ import Footer from "./components/sections/Footer";
 import LoadingScreen from "./components/ui/LoadingScreen";
 
 function App() {
-  const [loading, setLoading] =
-    useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -56,6 +55,9 @@ function App() {
           <Footer />
         </div>
       )}
+
+      {/* Vercel Analytics */}
+      <Analytics />
     </>
   );
 }
