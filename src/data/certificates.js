@@ -1,6 +1,19 @@
 const certificates = [
   {
     title:
+      "Magang Pranata Komputer Kantor Wilayah Kementerian Hukum Bengkulu",
+
+    issuer: "Maganghub Kemnaker",
+
+    year: "2026",
+
+    images: [
+      "/certificates/Maganghub.webp",
+    ],
+  },
+  
+  {
+    title:
       "Google Cloud Arcade Fasilitator 2025",
 
     issuer: "Dicoding Indonesia",
@@ -8,7 +21,7 @@ const certificates = [
     year: "2025",
 
     images: [
-      "/certificates/sertiffasil.jpg",
+      "/certificates/sertiffasil.webp",
     ],
   },
 
@@ -22,7 +35,7 @@ const certificates = [
     year: "2025",
 
     images: [
-      "/certificates/sertifmentor.jpg",
+      "/certificates/sertifmentor.webp",
     ],
   },
 
@@ -34,9 +47,9 @@ const certificates = [
     year: "2025",
 
     images: [
-      "/certificates/sertifaranus.jpg",
+      "/certificates/sertifaranus.webp",
 
-      "/certificates/sertifaranus2.jpg",
+      "/certificates/sertifaranus2.webp",
     ],
   },
 
@@ -48,10 +61,10 @@ const certificates = [
     year: "2023-2024",
 
     images: [
-      "/certificates/sertifasdosrpl.jpg",
-      "/certificates/sertifasdospw.jpg",
-      "/certificates/sertifasdospw2.jpg",
-      "/certificates/sertifasdosrpl2.jpg",
+      "/certificates/sertifasdosrpl.webp",
+      "/certificates/sertifasdospw.webp",
+      "/certificates/sertifasdospw2.webp",
+      "/certificates/sertifasdosrpl2.webp",
     ],
   },
 
@@ -63,7 +76,7 @@ const certificates = [
     year: "2024 - 2025",
 
     images: [
-      "/certificates/SertifikatGenBI.jpg",
+      "/certificates/SertifikatGenBI.webp",
     ],
   },
 
@@ -75,7 +88,7 @@ const certificates = [
     year: "2024 - 2025",
 
     images: [
-      "/certificates/sertifkwu.jpg",
+      "/certificates/sertifkwu.webp",
     ],
   },
 
@@ -88,7 +101,7 @@ const certificates = [
     year: "2022/2023",
 
     images: [
-      "/certificates/sertifbem.jpg",
+      "/certificates/sertifbem.webp",
     ],
   },
 
@@ -101,7 +114,7 @@ const certificates = [
     year: "2023",
 
     images: [
-      "/certificates/sertifneon.jpg",
+      "/certificates/sertifneon.webp",
     ],
   },
 
@@ -114,7 +127,7 @@ const certificates = [
     year: "2022/2023",
 
     images: [
-      "/certificates/sertifmost.jpg",
+      "/certificates/sertifmost.webp",
     ],
   },
 
@@ -127,7 +140,7 @@ const certificates = [
     year: "2022/2023",
 
     images: [
-      "/certificates/sertifhima.jpg",
+      "/certificates/sertifhima.webp",
     ],
   },
 
@@ -140,8 +153,8 @@ const certificates = [
     year: "2025 - 2028",
 
     images: [
-      "/certificates/SertifCC1.jpg",
-      "/certificates/SertifCC2.jpg",
+      "/certificates/SertifCC1.webp",
+      "/certificates/SertifCC2.webp",
     ],
   },
 
@@ -154,8 +167,8 @@ const certificates = [
     year: "2025 - 2028",
 
     images: [
-      "/certificates/SertifikasiSosmed.jpg",
-      "/certificates/SertifikatSosmed2.jpg",
+      "/certificates/SertifikasiSosmed.webp",
+      "/certificates/SertifikatSosmed2.webp",
     ],
   },
 
@@ -168,7 +181,7 @@ const certificates = [
     year: "2024",
 
     images: [
-      "/certificates/sertifmsib.jpg",
+      "/certificates/sertifmsib.webp",
     ],
   },
 
@@ -181,8 +194,8 @@ const certificates = [
     year: "2024",
 
     images: [
-      "/certificates/bangkit1.jpg",
-      "/certificates/bangkit2.jpg",
+      "/certificates/bangkit1.webp",
+      "/certificates/bangkit2.webp",
     ],
   },
 
@@ -195,7 +208,7 @@ const certificates = [
     year: "2025",
 
     images: [
-      "/certificates/idcamp.jpg",
+      "/certificates/idcamp.webp",
     ],
   },
 
@@ -208,7 +221,7 @@ const certificates = [
     year: "2025 - 2028",
 
     images: [
-      "/certificates/dcml.jpg",
+      "/certificates/dcml.webp",
     ],
   },
   
@@ -221,7 +234,7 @@ const certificates = [
     year: "2024",
 
     images: [
-      "/certificates/ml.jpg",
+      "/certificates/ml.webp",
     ],
   },
 
@@ -234,7 +247,7 @@ const certificates = [
     year: "=2024",
 
     images: [
-      "/certificates/Deepl.jpg",
+      "/certificates/Deepl.webp",
     ],
   },
 
@@ -247,7 +260,7 @@ const certificates = [
     year: "2024",
 
     images: [
-      "/certificates/tensor.jpg",
+      "/certificates/tensor.webp",
     ],
   },
 
@@ -260,7 +273,7 @@ const certificates = [
     year: "2024",
 
     images: [
-      "/certificates/tensoradv.jpg",
+      "/certificates/tensoradv.webp",
     ],
   },
 
@@ -273,7 +286,7 @@ const certificates = [
     year: "2024",
 
     images: [
-      "/certificates/git.jpg",
+      "/certificates/git.webp",
     ],
   },
 
@@ -286,7 +299,7 @@ const certificates = [
     year: "2024",
 
     images: [
-      "/certificates/cnn.jpg",
+      "/certificates/cnn.webp",
     ],
   },
 
@@ -299,7 +312,7 @@ const certificates = [
     year: "2024",
 
     images: [
-      "/certificates/supervised.jpg",
+      "/certificates/supervised.webp",
     ],
   },
 
@@ -312,7 +325,7 @@ const certificates = [
     year: "2024",
 
     images: [
-      "/certificates/intro.jpg",
+      "/certificates/intro.webp",
     ],
   },
 ];
