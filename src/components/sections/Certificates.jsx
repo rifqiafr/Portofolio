@@ -1,8 +1,6 @@
-// src/components/sections/Certificates.jsx
+import { useState, useEffect } from "react";
 
-import { useState } from "react";
-
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -14,6 +12,7 @@ import {
   FaSearchPlus,
   FaSearchMinus,
   FaRedo,
+  FaTimes,
 } from "react-icons/fa";
 
 import "swiper/css";
@@ -70,6 +69,22 @@ function Certificates() {
     });
     setIsDragging(false);
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    };
+    if (selectedCertificate) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedCertificate]);
 
   const handleZoomIn = () => {
     setZoom((prev) => Math.min(prev + 0.2, 3));
@@ -292,233 +307,209 @@ function Certificates() {
         </div>
       </div>
 
-      {/* MODAL DI LUAR WRAPPER */}
-      {selectedCertificate && (
-        <div className="fixed inset-0 z-[999999] bg-black/80 backdrop-blur-md flex items-center justify-center p-5">
-          {/* BACKDROP */}
-          <div onClick={closeModal} className="absolute inset-0" />
-
-          {/* CONTENT */}
-          <motion.div
-            initial={{
-              opacity: 0,
-              scale: 0.9,
-              y: 30,
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              y: 0,
-            }}
-            exit={{
-              opacity: 0,
-              scale: 0.9,
-            }}
-            transition={{
-              duration: 0.3,
-            }}
-            className="
-              relative
-              z-[1000000]
-              max-w-3xl
-              w-full
-              max-h-[90vh]
-              bg-white
-              dark:bg-[#111827]
-              rounded-3xl
-              overflow-y-auto
-              shadow-2xl
-              border
-              border-gray-200
-              dark:border-white/10
-            "
-          >
-            {/* CLOSE BUTTON */}
-            <button
+      {/* MODAL */}
+      <AnimatePresence>
+        {selectedCertificate && (
+          <div className="fixed inset-0 z-[999999] flex items-center justify-center p-4 sm:p-6 md:p-8">
+            {/* BACKDROP */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               onClick={closeModal}
+              className="absolute inset-0 bg-slate-950/75 backdrop-blur-md"
+            />
+
+            {/* MODAL WINDOW */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="
-                cursor-pointer
-                absolute
-                top-4
-                right-4
-                z-[1000002]
-                w-11
-                h-11
-                rounded-full
-                bg-black/50
-                backdrop-blur-md
-                text-white
+                relative
+                z-10
+                bg-white/95
+                dark:bg-[#0b1120]/95
+                backdrop-blur-2xl
+                rounded-3xl
+                max-w-5xl
+                w-full
+                max-h-[90vh]
+                overflow-hidden
+                border
+                border-slate-200/80
+                dark:border-white/10
+                shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)]
+                dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)]
                 flex
-                items-center
-                justify-center
-                hover:bg-[#023E8A]
-                hover:scale-110
-                transition
-                duration-300
+                flex-col
               "
             >
-              ✕
-            </button>
+              {/* TOP BAR */}
+              <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.02]">
+                <div className="flex items-center gap-2.5">
+                  <span className="px-3 py-1 rounded-full bg-[#023E8A]/10 text-[#023E8A] dark:text-cyan-300 text-xs font-semibold tracking-wide uppercase">
+                    Certificate
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 text-xs font-medium">
+                    {selectedCertificate.issuer}
+                  </span>
+                </div>
 
-            {/* ZOOM BUTTONS */}
-            <div className="absolute top-4 left-4 z-[1000002] flex items-center gap-2">
-              <button
-                onClick={handleZoomOut}
-                className="
-                  cursor-pointer
-                  w-10
-                  h-10
-                  rounded-full
-                  bg-black/50
-                  backdrop-blur-md
-                  text-white
-                  flex
-                  items-center
-                  justify-center
-                  hover:bg-[#023E8A]
-                  transition
-                "
-              >
-                <FaSearchMinus />
-              </button>
+                <button
+                  onClick={closeModal}
+                  aria-label="Close modal"
+                  className="
+                    cursor-pointer
+                    w-8 h-8 sm:w-9 sm:h-9
+                    rounded-full
+                    bg-slate-100
+                    dark:bg-white/10
+                    text-slate-600
+                    dark:text-slate-300
+                    hover:bg-red-500
+                    hover:text-white
+                    dark:hover:bg-red-500
+                    dark:hover:text-white
+                    flex
+                    items-center
+                    justify-center
+                    text-sm
+                    transition-all
+                    duration-200
+                    active:scale-90
+                  "
+                >
+                  <FaTimes />
+                </button>
+              </div>
 
-              <button
-                onClick={handleResetZoom}
-                className="
-                  cursor-pointer
-                  w-10
-                  h-10
-                  rounded-full
-                  bg-black/50
-                  backdrop-blur-md
-                  text-white
-                  flex
-                  items-center
-                  justify-center
-                  hover:bg-[#023E8A]
-                  transition
-                "
-              >
-                <FaRedo />
-              </button>
+              {/* 2-COLUMN SPLIT CONTENT */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 overflow-y-auto max-h-[calc(90vh-65px)]">
+                {/* LEFT: CERTIFICATE VIEWER (7 COLS) */}
+                <div className="lg:col-span-7 p-4 sm:p-5 bg-slate-950 flex flex-col justify-center relative border-b lg:border-b-0 lg:border-r border-slate-100 dark:border-white/5 min-h-[350px] sm:min-h-[420px]">
+                  {/* FLOATING ZOOM TOOLBAR */}
+                  <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 p-1 rounded-full bg-slate-900/85 backdrop-blur-md border border-white/15 shadow-xl">
+                    <button
+                      onClick={handleZoomOut}
+                      aria-label="Zoom out"
+                      className="cursor-pointer w-8 h-8 rounded-full text-white/80 hover:text-white hover:bg-white/10 flex items-center justify-center text-xs transition"
+                    >
+                      <FaSearchMinus />
+                    </button>
 
-              <button
-                onClick={handleZoomIn}
-                className="
-                  cursor-pointer
-                  w-10
-                  h-10
-                  rounded-full
-                  bg-black/50
-                  backdrop-blur-md
-                  text-white
-                  flex
-                  items-center
-                  justify-center
-                  hover:bg-[#023E8A]
-                  transition
-                "
-              >
-                <FaSearchPlus />
-              </button>
-            </div>
+                    <button
+                      onClick={handleResetZoom}
+                      aria-label="Reset zoom"
+                      className="cursor-pointer px-2.5 h-8 rounded-full text-white/90 hover:text-white hover:bg-white/10 flex items-center gap-1 text-[11px] font-mono transition"
+                    >
+                      <FaRedo className="text-[10px]" />
+                      <span>{Math.round(zoom * 100)}%</span>
+                    </button>
 
-            {/* IMAGE SLIDER MODAL */}
-            <Swiper
-              modules={[Navigation, Pagination, Autoplay]}
-              navigation={selectedCertificate.images.length > 1 && zoom === 1}
-              pagination={{
-                clickable: true,
-              }}
-              autoplay={
-                selectedCertificate.images.length > 1 && zoom === 1
-                  ? {
-                      delay: 3000,
-                      disableOnInteraction: false,
-                    }
-                  : false
-              }
-              allowTouchMove={zoom === 1}
-              observer={true}
-              observeParents={true}
-              loop={selectedCertificate.images.length > 2 && zoom === 1}
-              onSlideChange={() => {
-                setZoom(1);
-                setPosition({
-                  x: 0,
-                  y: 0,
-                });
-                setIsDragging(false);
-              }}
-              className="rounded-t-3xl overflow-hidden"
-            >
-              {selectedCertificate.images.map((image, index) => (
-                <SwiperSlide key={index}>
-                  <div
-                    onPointerDown={handlePointerDown}
-                    onPointerMove={handlePointerMove}
-                    onPointerUp={handlePointerUp}
-                    onPointerCancel={handlePointerUp}
-                    className={`
-                      relative
-                      bg-black
-                      flex
-                      items-center
-                      justify-center
-                      overflow-hidden
-                      select-none
-                      h-[65vh]
-                      touch-none
-                      ${
-                        zoom > 1
-                          ? "cursor-grab active:cursor-grabbing"
-                          : "cursor-default"
-                      }
-                    `}
-                  >
-                    <img
-                      src={image}
-                      alt="certificate"
-                      draggable={false}
-                      className="w-full h-full object-contain will-change-transform"
-                      style={{
-                        transform: `translate3d(${position.x}px, ${position.y}px, 0) scale(${zoom})`,
-                        transformOrigin: "center center",
-                        transition: isDragging ? "none" : "transform 0.2s ease",
-                      }}
-                    />
+                    <button
+                      onClick={handleZoomIn}
+                      aria-label="Zoom in"
+                      className="cursor-pointer w-8 h-8 rounded-full text-white/80 hover:text-white hover:bg-white/10 flex items-center justify-center text-xs transition"
+                    >
+                      <FaSearchPlus />
+                    </button>
                   </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
 
-            {/* INFO */}
-            <div className="p-6 md:p-8">
-              {/* TITLE */}
-              <h2 className="text-2xl md:text-3xl font-black text-gray-900 dark:text-white leading-tight">
-                {selectedCertificate.title}
-              </h2>
+                  {/* IMAGE SLIDER */}
+                  <Swiper
+                    modules={[Navigation, Pagination, Autoplay]}
+                    navigation={selectedCertificate.images.length > 1 && zoom === 1}
+                    pagination={{ clickable: true }}
+                    autoplay={
+                      selectedCertificate.images.length > 1 && zoom === 1
+                        ? { delay: 3500, disableOnInteraction: false }
+                        : false
+                    }
+                    allowTouchMove={zoom === 1}
+                    loop={selectedCertificate.images.length > 2 && zoom === 1}
+                    onSlideChange={() => {
+                      setZoom(1);
+                      setPosition({ x: 0, y: 0 });
+                      setIsDragging(false);
+                    }}
+                    className="w-full h-full rounded-2xl overflow-hidden"
+                  >
+                    {selectedCertificate.images.map((image, index) => (
+                      <SwiperSlide key={index}>
+                        <div
+                          onPointerDown={handlePointerDown}
+                          onPointerMove={handlePointerMove}
+                          onPointerUp={handlePointerUp}
+                          onPointerCancel={handlePointerUp}
+                          className={`
+                            relative
+                            w-full
+                            h-[320px]
+                            sm:h-[400px]
+                            flex
+                            items-center
+                            justify-center
+                            overflow-hidden
+                            select-none
+                            touch-none
+                            ${
+                              zoom > 1
+                                ? "cursor-grab active:cursor-grabbing"
+                                : "cursor-default"
+                            }
+                          `}
+                        >
+                          <img
+                            src={image}
+                            alt="certificate"
+                            draggable={false}
+                            className="w-full h-full object-contain will-change-transform"
+                            style={{
+                              transform: `translate3d(${position.x}px, ${position.y}px, 0) scale(${zoom})`,
+                              transformOrigin: "center center",
+                              transition: isDragging ? "none" : "transform 0.2s ease",
+                            }}
+                          />
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
 
-              {/* ISSUER */}
-              <p className="mt-4 text-[#023E8A] font-semibold">
-                {selectedCertificate.issuer}
-              </p>
+                {/* RIGHT: DETAILS (5 COLS) */}
+                <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between">
+                  <div>
+                    <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white leading-tight">
+                      {selectedCertificate.title}
+                    </h2>
 
-              {/* YEAR */}
-              <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                {selectedCertificate.year}
-              </p>
+                    <div className="mt-3 flex items-center gap-2">
+                      <span className="text-sm font-bold text-[#023E8A] dark:text-cyan-400">
+                        {selectedCertificate.issuer}
+                      </span>
+                      <span className="text-xs text-slate-400 dark:text-slate-500">•</span>
+                      <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+                        {selectedCertificate.year}
+                      </span>
+                    </div>
 
-              {/* DESCRIPTION */}
-              {selectedCertificate.description && (
-                <p className="mt-5 text-gray-600 dark:text-gray-300 leading-8">
-                  {selectedCertificate.description}
-                </p>
-              )}
-            </div>
-          </motion.div>
-        </div>
-      )}
+                    {selectedCertificate.description && (
+                      <div className="mt-5 pt-4 border-t border-slate-100 dark:border-white/5">
+                        <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                          {selectedCertificate.description}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

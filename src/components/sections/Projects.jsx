@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 
-import { FaGithub, FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaGithub, FaArrowLeft, FaArrowRight, FaTimes } from "react-icons/fa";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -36,6 +36,22 @@ function Projects() {
     setIsBeginning(swiper.isBeginning);
     setIsEnd(swiper.isEnd);
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setSelectedProject(null);
+      }
+    };
+    if (selectedProject) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedProject]);
 
   return (
     <section
@@ -284,115 +300,212 @@ function Projects() {
       </div>
 
       {/* MODAL */}
-      {selectedProject && (
-        <div className="fixed inset-0 z-[999999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-5">
-          <div
-            onClick={() => setSelectedProject(null)}
-            className="absolute inset-0"
-          />
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 40 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="
-              relative
-              z-[1000000]
-              bg-white
-              dark:bg-[#111827]
-              rounded-3xl
-              max-w-4xl
-              w-full
-              overflow-y-auto
-              max-h-[85vh]
-              border
-              border-gray-200
-              dark:border-white/10
-              shadow-2xl
-            "
-          >
-            <button
+      <AnimatePresence>
+        {selectedProject && (
+          <div className="fixed inset-0 z-[999999] flex items-center justify-center p-4 sm:p-6 md:p-8">
+            {/* BACKDROP */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setSelectedProject(null)}
+              className="absolute inset-0 bg-slate-950/75 backdrop-blur-md"
+            />
+
+            {/* MODAL WINDOW */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="
-                cursor-pointer
-                absolute
-                top-7
-                right-7
-                z-[1000001]
-                w-11
-                h-11
-                rounded-full
-                bg-black/60
-                text-white
+                relative
+                z-10
+                bg-white/95
+                dark:bg-[#0b1120]/95
+                backdrop-blur-2xl
+                rounded-3xl
+                max-w-5xl
+                w-full
+                max-h-[90vh]
+                overflow-hidden
+                border
+                border-slate-200/80
+                dark:border-white/10
+                shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)]
+                dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)]
                 flex
-                items-center
-                justify-center
-                text-xl
-                hover:bg-[#023E8A]
-                hover:scale-110
-                active:scale-95
-                transition
+                flex-col
               "
             >
-              ✕
-            </button>
-
-            <div className="relative p-4 md:p-5 bg-gray-50 dark:bg-white/[0.03]">
-              <div className="relative overflow-hidden rounded-2xl shadow-xl bg-gray-100 dark:bg-white/5">
-                <img
-                  src={selectedProject.image}
-                  alt={selectedProject.title}
-                  className="w-full aspect-[16/9] object-cover"
-                />
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-              </div>
-            </div>
-
-            <div className="p-7 md:p-8">
-              <span className="px-4 py-2 rounded-full bg-[#023E8A]/10 text-[#023E8A] text-sm font-semibold">
-                {selectedProject.category}
-              </span>
-
-              <h2 className="text-3xl md:text-4xl font-black mt-6 text-gray-900 dark:text-white leading-tight">
-                {selectedProject.title}
-              </h2>
-
-              <p className="mt-6 text-gray-600 dark:text-gray-300 leading-8 text-base md:text-lg">
-                {selectedProject.description || selectedProject.Description}
-              </p>
-
-              {selectedProject.tech?.length > 0 && (
-                <div className="flex flex-wrap gap-3 mt-8">
-                  {selectedProject.tech.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-4 py-2 rounded-full bg-gray-100 dark:bg-white/5 text-sm text-gray-700 dark:text-gray-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+              {/* TOP BAR */}
+              <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.02]">
+                <div className="flex items-center gap-2.5">
+                  <span className="px-3 py-1 rounded-full bg-[#023E8A]/10 text-[#023E8A] dark:text-cyan-300 text-xs font-semibold tracking-wide uppercase">
+                    {selectedProject.category}
+                  </span>
+                  <span className="hidden sm:inline-block text-xs text-slate-400 dark:text-slate-500">
+                    Project Details
+                  </span>
                 </div>
-              )}
 
-              <div className="flex flex-wrap gap-5 mt-10">
-                {selectedProject.github &&
-                  selectedProject.category !== "Design" && (
-                    <a
-                      href={selectedProject.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-7 py-4 rounded-2xl bg-[#023E8A] text-white font-semibold hover:scale-105 active:scale-95 transition"
-                    >
-                      <FaGithub className="inline mr-2" />
-                      View Github
-                    </a>
-                  )}
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  aria-label="Close modal"
+                  className="
+                    cursor-pointer
+                    w-8 h-8 sm:w-9 sm:h-9
+                    rounded-full
+                    bg-slate-100
+                    dark:bg-white/10
+                    text-slate-600
+                    dark:text-slate-300
+                    hover:bg-red-500
+                    hover:text-white
+                    dark:hover:bg-red-500
+                    dark:hover:text-white
+                    flex
+                    items-center
+                    justify-center
+                    text-sm
+                    transition-all
+                    duration-200
+                    active:scale-90
+                  "
+                >
+                  <FaTimes />
+                </button>
               </div>
-            </div>
-          </motion.div>
-        </div>
-      )}
+
+              {/* 2-COLUMN SPLIT CONTENT */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 overflow-y-auto max-h-[calc(90vh-65px)]">
+                {/* LEFT: MEDIA SHOWCASE (5 COLS) */}
+                <div className="lg:col-span-5 p-5 sm:p-6 bg-slate-50/80 dark:bg-black/20 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-100 dark:border-white/5">
+                  <div className="relative group overflow-hidden rounded-2xl border border-slate-200/80 dark:border-white/10 shadow-md bg-slate-900 aspect-[16/10] sm:aspect-[16/11]">
+                    <img
+                      src={selectedProject.image}
+                      alt={selectedProject.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none" />
+                  </div>
+
+                  {selectedProject.github && selectedProject.category !== "Design" && (
+                    <div className="mt-5 hidden lg:block">
+                      <a
+                        href={selectedProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="
+                          flex
+                          items-center
+                          justify-center
+                          gap-2.5
+                          w-full
+                          py-3
+                          px-5
+                          rounded-xl
+                          bg-[#023E8A]
+                          text-white
+                          text-sm
+                          font-semibold
+                          shadow-lg
+                          shadow-[#023E8A]/25
+                          hover:bg-[#0353a4]
+                          hover:scale-[1.02]
+                          active:scale-[0.98]
+                          transition
+                          duration-200
+                        "
+                      >
+                        <FaGithub className="text-base" />
+                        <span>Source Code Repository</span>
+                      </a>
+                    </div>
+                  )}
+                </div>
+
+                {/* RIGHT: DETAILS & STACK (7 COLS) */}
+                <div className="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between">
+                  <div>
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight">
+                      {selectedProject.title}
+                    </h2>
+
+                    <div className="mt-4">
+                      <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                        {selectedProject.description || selectedProject.Description}
+                      </p>
+                    </div>
+
+                    {selectedProject.tech?.length > 0 && (
+                      <div className="mt-6 pt-5 border-t border-slate-100 dark:border-white/5">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
+                          Teknologi & Tools
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedProject.tech.map((tech, index) => (
+                            <span
+                              key={index}
+                              className="
+                                px-3
+                                py-1.5
+                                rounded-lg
+                                bg-slate-100
+                                dark:bg-white/5
+                                border
+                                border-slate-200/60
+                                dark:border-white/10
+                                text-xs
+                                font-medium
+                                text-slate-700
+                                dark:text-slate-300
+                              "
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* MOBILE GITHUB ACTION IF AVAILABLE */}
+                  {selectedProject.github && selectedProject.category !== "Design" && (
+                    <div className="mt-6 pt-5 border-t border-slate-100 dark:border-white/5 flex items-center justify-end lg:hidden">
+                      <a
+                        href={selectedProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="
+                          flex
+                          items-center
+                          gap-2
+                          py-2.5
+                          px-4
+                          rounded-xl
+                          bg-[#023E8A]
+                          text-white
+                          text-xs
+                          font-semibold
+                          shadow-md
+                          hover:bg-[#0353a4]
+                          active:scale-95
+                          transition
+                        "
+                      >
+                        <FaGithub />
+                        <span>Github</span>
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

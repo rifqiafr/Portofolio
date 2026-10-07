@@ -1,7 +1,5 @@
-// src/components/sections/Experience.jsx
-
-import { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 
@@ -10,6 +8,7 @@ import {
   FaUsers,
   FaArrowLeft,
   FaArrowRight,
+  FaTimes,
 } from "react-icons/fa";
 
 import "swiper/css";
@@ -41,6 +40,22 @@ function Experience() {
     setIsBeginning(swiper.isBeginning);
     setIsEnd(swiper.isEnd);
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setSelectedExperience(null);
+      }
+    };
+    if (selectedExperience) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedExperience]);
 
   return (
     <section
@@ -293,134 +308,177 @@ function Experience() {
       </div>
 
       {/* MODAL */}
-      {selectedExperience && (
-        <div className="fixed inset-0 z-[999999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-5">
-          <div
-            onClick={() => setSelectedExperience(null)}
-            className="absolute inset-0"
-          />
-
-          <motion.div
-            initial={{
-              opacity: 0,
-              scale: 0.9,
-              y: 40,
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 0.3,
-            }}
-            className="
-              relative
-              z-[1000000]
-              bg-white
-              dark:bg-[#111827]
-              rounded-3xl
-              max-w-4xl
-              w-full
-              max-h-[85vh]
-              overflow-y-auto
-              border
-              border-gray-200
-              dark:border-white/10
-              shadow-2xl
-            "
-          >
-            <button
+      <AnimatePresence>
+        {selectedExperience && (
+          <div className="fixed inset-0 z-[999999] flex items-center justify-center p-4 sm:p-6 md:p-8">
+            {/* BACKDROP */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setSelectedExperience(null)}
+              className="absolute inset-0 bg-slate-950/75 backdrop-blur-md"
+            />
+
+            {/* MODAL WINDOW */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               className="
-                cursor-pointer
-                absolute
-                top-7
-                right-7
-                z-[1000001]
-                w-11
-                h-11
-                rounded-full
-                bg-black/60
-                text-white
+                relative
+                z-10
+                bg-white/95
+                dark:bg-[#0b1120]/95
+                backdrop-blur-2xl
+                rounded-3xl
+                max-w-5xl
+                w-full
+                max-h-[90vh]
+                overflow-hidden
+                border
+                border-slate-200/80
+                dark:border-white/10
+                shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)]
+                dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)]
                 flex
-                items-center
-                justify-center
-                text-2xl
-                hover:bg-[#023E8A]
-                transition
+                flex-col
               "
             >
-              ×
-            </button>
+              {/* TOP BAR */}
+              <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-white/5 bg-slate-50/50 dark:bg-white/[0.02]">
+                <div className="flex items-center gap-2.5">
+                  <span className="px-3 py-1 rounded-full bg-[#023E8A]/10 text-[#023E8A] dark:text-cyan-300 text-xs font-semibold tracking-wide uppercase">
+                    {selectedExperience.category === "work" ? "Work Experience" : "Organization"}
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 text-xs font-medium">
+                    {selectedExperience.year}
+                  </span>
+                </div>
 
-            <div className="relative p-4 md:p-5 bg-gray-50 dark:bg-white/[0.03]">
-              <div className="relative overflow-hidden rounded-2xl shadow-xl bg-gray-100 dark:bg-white/5">
-                <Swiper
-                  modules={[Autoplay]}
-                  autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                  }}
-                  loop={selectedExperience.images?.length > 1}
-                  speed={900}
-                  slidesPerView={1}
-                  className="rounded-2xl"
+                <button
+                  onClick={() => setSelectedExperience(null)}
+                  aria-label="Close modal"
+                  className="
+                    cursor-pointer
+                    w-8 h-8 sm:w-9 sm:h-9
+                    rounded-full
+                    bg-slate-100
+                    dark:bg-white/10
+                    text-slate-600
+                    dark:text-slate-300
+                    hover:bg-red-500
+                    hover:text-white
+                    dark:hover:bg-red-500
+                    dark:hover:text-white
+                    flex
+                    items-center
+                    justify-center
+                    text-sm
+                    transition-all
+                    duration-200
+                    active:scale-90
+                  "
                 >
-                  {selectedExperience.images?.map((image, index) => (
-                    <SwiperSlide key={index}>
-                      <img
-                        src={image}
-                        alt={selectedExperience.title}
-                        className="w-full aspect-[16/9] object-cover"
-                      />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                  <FaTimes />
+                </button>
               </div>
-            </div>
 
-            <div className="p-7 md:p-8">
-              <span className="inline-block px-5 py-2 rounded-full bg-[#023E8A]/10 text-[#023E8A] text-sm font-semibold">
-                {selectedExperience.year}
-              </span>
+              {/* 2-COLUMN SPLIT CONTENT */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 overflow-y-auto max-h-[calc(90vh-65px)]">
+                {/* LEFT: MEDIA SLIDER (5 COLS) */}
+                <div className="lg:col-span-5 p-5 sm:p-6 bg-slate-50/80 dark:bg-black/20 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-100 dark:border-white/5">
+                  <div className="relative overflow-hidden rounded-2xl border border-slate-200/80 dark:border-white/10 shadow-md bg-slate-900 aspect-[16/10] sm:aspect-[16/11]">
+                    <Swiper
+                      modules={[Autoplay]}
+                      autoplay={{
+                        delay: 3000,
+                        disableOnInteraction: false,
+                      }}
+                      loop={selectedExperience.images?.length > 1}
+                      speed={700}
+                      slidesPerView={1}
+                      className="w-full h-full"
+                    >
+                      {selectedExperience.images?.map((image, index) => (
+                        <SwiperSlide key={index}>
+                          <img
+                            src={image}
+                            alt={selectedExperience.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none" />
+                  </div>
 
-              <h2 className="mt-5 text-2xl md:text-3xl font-black text-gray-900 dark:text-white leading-tight">
-                {selectedExperience.title}
-              </h2>
-
-              <p className="mt-3 text-[#023E8A] font-bold text-lg">
-                {selectedExperience.company}
-              </p>
-
-              <p className="mt-5 text-gray-600 dark:text-gray-300 leading-8 text-base md:text-lg">
-                {selectedExperience.description}
-              </p>
-
-              {selectedExperience.tech?.length > 0 && (
-                <div className="mt-7">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-                    Skills / Tools
-                  </h3>
-
-                  <div className="flex flex-wrap gap-3">
-                    {selectedExperience.tech.map((tech, index) => (
-                      <span
-                        key={index}
-                        className="px-4 py-2 rounded-full bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                  <div className="mt-4 p-4 rounded-2xl bg-white dark:bg-white/5 border border-slate-100 dark:border-white/5 hidden lg:block">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                      Perusahaan / Organisasi
+                    </p>
+                    <p className="text-sm font-bold text-slate-900 dark:text-white mt-1">
+                      {selectedExperience.company}
+                    </p>
                   </div>
                 </div>
-              )}
-            </div>
-          </motion.div>
-        </div>
-      )}
+
+                {/* RIGHT: DETAILS (7 COLS) */}
+                <div className="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between">
+                  <div>
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight">
+                      {selectedExperience.title}
+                    </h2>
+
+                    <p className="mt-2 text-sm sm:text-base font-semibold text-[#023E8A] dark:text-cyan-400">
+                      {selectedExperience.company}
+                    </p>
+
+                    <div className="mt-4">
+                      <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed whitespace-pre-line">
+                        {selectedExperience.description}
+                      </p>
+                    </div>
+
+                    {selectedExperience.tech?.length > 0 && (
+                      <div className="mt-6 pt-5 border-t border-slate-100 dark:border-white/5">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
+                          Keahlian & Peran Utama
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedExperience.tech.map((tech, index) => (
+                            <span
+                              key={index}
+                              className="
+                                px-3
+                                py-1.5
+                                rounded-lg
+                                bg-slate-100
+                                dark:bg-white/5
+                                border
+                                border-slate-200/60
+                                dark:border-white/10
+                                text-xs
+                                font-medium
+                                text-slate-700
+                                dark:text-slate-300
+                              "
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
