@@ -40,22 +40,12 @@ function Projects() {
   return (
     <section
       id="projects"
-      className="relative py-32 px-6 md:px-10 lg:px-16 bg-white dark:bg-[#0f172a] overflow-hidden"
+      className="relative w-full min-h-screen lg:h-screen flex flex-col justify-center px-6 md:px-10 lg:px-12 xl:px-16 py-8 lg:py-4 overflow-y-auto lg:overflow-hidden bg-white dark:bg-[#0f172a] transition-colors"
     >
       {/* BACKGROUND */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[-120px] left-[-120px] w-[350px] h-[350px] bg-[#023E8A]/10 rounded-full blur-3xl"
-        />
-
-        <motion.div
-          animate={{ x: [0, -30, 0], y: [0, 20, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[-120px] right-[-120px] w-[350px] h-[350px] bg-cyan-400/10 rounded-full blur-3xl"
-        />
-
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-100px] left-[-100px] w-[350px] h-[350px] bg-[#023E8A]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-[-100px] right-[-100px] w-[350px] h-[350px] bg-cyan-400/10 rounded-full blur-3xl" />
         <div
           className="
             absolute inset-0
@@ -66,104 +56,91 @@ function Projects() {
             bg-[size:70px_70px]
           "
         />
-
-        <div className="absolute left-1/2 top-1/2 w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 bg-cyan-400/5 rounded-full blur-[120px]" />
-
-        <motion.div
-          animate={{ y: [0, -15, 0], opacity: [0.4, 1, 0.4] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[20%] right-[18%] w-4 h-4 rounded-full bg-cyan-400 shadow-[0_0_25px_rgba(34,211,238,0.8)]"
-        />
-
-        <motion.div
-          animate={{ y: [0, 15, 0], opacity: [0.3, 0.8, 0.3] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[25%] left-[15%] w-3 h-3 rounded-full bg-[#023E8A] shadow-[0_0_25px_rgba(2,62,138,0.8)]"
-        />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto">
-        <SectionTitle title="My" highlight="Projects" />
+      <div className="relative z-10 max-w-7xl mx-auto w-full">
+        {/* COMPACT INTEGRATED HEADER */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4 lg:mb-6">
+          <SectionTitle title="My" highlight="Projects" />
 
-        {/* FILTER */}
-        <div className="flex flex-wrap justify-center gap-4 mt-14">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => handleCategoryChange(category)}
-              className={`cursor-pointer px-6 py-3 rounded-2xl font-medium transition duration-300 active:scale-95 ${
-                activeCategory === category
-                  ? "bg-[#023E8A] text-white shadow-lg shadow-[#023E8A]/30"
-                  : "bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-[#023E8A] hover:text-white"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+          <div className="flex items-center gap-3 flex-wrap">
+            {/* FILTER BUTTONS */}
+            <div className="flex items-center gap-1.5 p-1 bg-gray-100 dark:bg-white/5 rounded-2xl border border-gray-200/60 dark:border-white/10">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => handleCategoryChange(category)}
+                  className={`cursor-pointer px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition duration-200 ${
+                    activeCategory === category
+                      ? "bg-[#023E8A] text-white shadow-md shadow-[#023E8A]/30"
+                      : "text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
 
-        {/* NAVIGATION */}
-        <div className="flex items-center justify-end gap-4 mt-14 mb-10">
-          <div className="flex items-center gap-4">
-            <button
-              disabled={isBeginning || totalSlides <= 1}
-              className={`
-                project-prev
-                relative overflow-hidden
-                w-12 md:w-14 h-12 md:h-14
-                rounded-2xl
-                border border-gray-200 dark:border-white/10
-                flex items-center justify-center
-                text-lg md:text-xl
-                shadow-lg
-                transition-all duration-300
-                ${
-                  isBeginning || totalSlides <= 1
-                    ? "bg-gray-100 dark:bg-white/5 text-gray-400 opacity-50 cursor-not-allowed pointer-events-none"
-                    : "cursor-pointer bg-white dark:bg-white/5 text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#023E8A]/30 active:scale-90 active:bg-[#012f6b]"
-                }
-              `}
-            >
-              <FaArrowLeft />
-            </button>
+            {/* NAVIGATION BUTTONS */}
+            <div className="flex items-center gap-2">
+              <button
+                disabled={isBeginning || totalSlides <= 1}
+                aria-label="Previous project"
+                className={`
+                  project-prev
+                  w-9 h-9 sm:w-10 sm:h-10
+                  rounded-xl
+                  border border-gray-200 dark:border-white/10
+                  flex items-center justify-center
+                  text-sm
+                  transition-all duration-200
+                  ${
+                    isBeginning || totalSlides <= 1
+                      ? "bg-gray-100 dark:bg-white/5 text-gray-400 opacity-50 cursor-not-allowed pointer-events-none"
+                      : "cursor-pointer bg-white dark:bg-white/5 text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white hover:border-[#023E8A] shadow-sm active:scale-95"
+                  }
+                `}
+              >
+                <FaArrowLeft />
+              </button>
 
-            <button
-              disabled={isEnd || totalSlides <= 1}
-              className={`
-                project-next
-                relative overflow-hidden
-                w-12 md:w-14 h-12 md:h-14
-                rounded-2xl
-                border border-gray-200 dark:border-white/10
-                flex items-center justify-center
-                text-lg md:text-xl
-                shadow-lg
-                transition-all duration-300
-                ${
-                  isEnd || totalSlides <= 1
-                    ? "bg-gray-100 dark:bg-white/5 text-gray-400 opacity-50 cursor-not-allowed pointer-events-none"
-                    : "cursor-pointer bg-white dark:bg-white/5 text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#023E8A]/30 active:scale-90 active:bg-[#012f6b]"
-                }
-              `}
-            >
-              <FaArrowRight />
-            </button>
+              <button
+                disabled={isEnd || totalSlides <= 1}
+                aria-label="Next project"
+                className={`
+                  project-next
+                  w-9 h-9 sm:w-10 sm:h-10
+                  rounded-xl
+                  border border-gray-200 dark:border-white/10
+                  flex items-center justify-center
+                  text-sm
+                  transition-all duration-200
+                  ${
+                    isEnd || totalSlides <= 1
+                      ? "bg-gray-100 dark:bg-white/5 text-gray-400 opacity-50 cursor-not-allowed pointer-events-none"
+                      : "cursor-pointer bg-white dark:bg-white/5 text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white hover:border-[#023E8A] shadow-sm active:scale-95"
+                  }
+                `}
+              >
+                <FaArrowRight />
+              </button>
+            </div>
           </div>
         </div>
 
         {/* PROJECT SWIPER */}
-        <div className="w-full overflow-hidden">
+        <div className="w-full">
           <Swiper
             key={activeCategory}
             modules={[Navigation]}
             slidesPerView={1}
-            spaceBetween={24}
+            spaceBetween={20}
             navigation={{
               nextEl: ".project-next",
               prevEl: ".project-prev",
             }}
             loop={false}
-            speed={1000}
+            speed={600}
             onInit={handleSwiperState}
             onSlideChange={handleSwiperState}
             onReachBeginning={(swiper) => handleSwiperState(swiper)}
@@ -171,55 +148,57 @@ function Projects() {
             breakpoints={{
               0: {
                 slidesPerView: 1,
-                spaceBetween: 20,
+                spaceBetween: 16,
               },
               768: {
                 slidesPerView: 2,
-                spaceBetween: 24,
+                spaceBetween: 20,
               },
               1200: {
                 slidesPerView: 3,
-                spaceBetween: 30,
+                spaceBetween: 24,
               },
             }}
-            className="pb-10 overflow-hidden"
+            className="pb-2 overflow-hidden"
           >
             {filteredProjects.map((project, index) => (
               <SwiperSlide key={`${project.title}-${index}`} className="!h-auto">
                 <motion.div
-                  initial={{ opacity: 0, y: 40 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
                   viewport={{ once: true }}
                   className="
                     group
                     relative
                     h-full
+                    flex
+                    flex-col
                     bg-white/80
                     dark:bg-white/[0.04]
                     backdrop-blur-xl
                     border
                     border-gray-200
                     dark:border-white/10
-                    rounded-3xl
+                    rounded-2xl
                     overflow-hidden
-                    shadow-xl
-                    hover:-translate-y-3
-                    hover:shadow-2xl
-                    hover:shadow-cyan-500/10
+                    shadow-md
+                    hover:shadow-xl
+                    hover:border-[#023E8A]/40
                     transition
-                    duration-500
+                    duration-300
                   "
                 >
                   {/* GLOW */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-br from-cyan-400/10 via-transparent to-[#023E8A]/10 pointer-events-none" />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 bg-gradient-to-br from-cyan-400/10 via-transparent to-[#023E8A]/10 pointer-events-none" />
 
                   {/* IMAGE */}
-                  <div className="relative overflow-hidden">
+                  <div className="relative overflow-hidden aspect-[16/10] bg-gray-100 dark:bg-black/30">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full aspect-[16/9] object-cover group-hover:scale-110 transition duration-700"
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                     />
 
                     {/* GITHUB */}
@@ -228,17 +207,18 @@ function Projects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white hover:scale-110 active:scale-90 transition"
+                        aria-label="View Github Repository"
+                        className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white hover:scale-110 active:scale-95 transition"
                       >
-                        <FaGithub />
+                        <FaGithub className="text-sm" />
                       </a>
                     )}
 
                     {/* OVERLAY */}
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
                       <button
                         onClick={() => setSelectedProject(project)}
-                        className="cursor-pointer px-6 py-3 rounded-2xl bg-white text-black font-semibold hover:scale-105 active:scale-95 transition"
+                        className="cursor-pointer px-4 py-2 rounded-xl bg-white text-black text-xs font-semibold hover:scale-105 active:scale-95 transition"
                       >
                         View Details
                       </button>
@@ -246,32 +226,33 @@ function Projects() {
                   </div>
 
                   {/* CONTENT */}
-                  <div className="relative z-10 p-7 h-[380px] flex flex-col">
-                    <span className="w-fit text-sm px-4 py-1 rounded-full bg-[#023E8A]/10 text-[#023E8A] dark:text-cyan-300">
-                      {project.category}
-                    </span>
+                  <div className="relative z-10 p-4 sm:p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <span className="inline-block text-xs px-2.5 py-0.5 rounded-full bg-[#023E8A]/10 text-[#023E8A] dark:text-cyan-300 font-medium">
+                        {project.category}
+                      </span>
 
-                    <h3 className="text-2xl font-bold mt-5 text-gray-900 dark:text-white line-clamp-3">
-                      {project.title}
-                    </h3>
+                      <h3 className="text-base sm:text-lg font-bold mt-2 text-gray-900 dark:text-white line-clamp-1 group-hover:text-[#023E8A] dark:group-hover:text-cyan-400 transition-colors">
+                        {project.title}
+                      </h3>
 
-                    <p className="mt-4 text-gray-600 dark:text-gray-300 leading-7 line-clamp-2">
-                      {project.Description || project.description}
-                    </p>
+                      <p className="mt-1.5 text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed">
+                        {project.Description || project.description}
+                      </p>
+                    </div>
 
-                    <div className="mt-auto overflow-hidden">
-                      <div className="flex flex-wrap gap-2">
+                    <div className="mt-4 pt-3 border-t border-gray-100 dark:border-white/5 flex items-center justify-between">
+                      <div className="flex flex-wrap gap-1.5">
                         {project.tech?.slice(0, 2).map((tech, i) => (
                           <span
                             key={i}
                             className="
-                              shrink-0
-                              px-4
-                              py-2
-                              rounded-full
+                              px-2.5
+                              py-1
+                              rounded-lg
                               bg-gray-100
                               dark:bg-white/5
-                              text-sm
+                              text-[11px]
                               text-gray-700
                               dark:text-gray-300
                             "
@@ -281,11 +262,18 @@ function Projects() {
                         ))}
 
                         {project.tech?.length > 2 && (
-                          <span className="shrink-0 px-4 py-2 rounded-full bg-[#023E8A]/10 text-[#023E8A] text-sm font-semibold">
+                          <span className="px-2 py-1 rounded-lg bg-[#023E8A]/10 text-[#023E8A] text-[11px] font-semibold">
                             +{project.tech.length - 2}
                           </span>
                         )}
                       </div>
+
+                      <button
+                        onClick={() => setSelectedProject(project)}
+                        className="text-xs font-medium text-[#023E8A] dark:text-cyan-400 hover:underline cursor-pointer"
+                      >
+                        Detail &rarr;
+                      </button>
                     </div>
                   </div>
                 </motion.div>

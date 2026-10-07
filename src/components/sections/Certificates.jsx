@@ -138,135 +138,63 @@ function Certificates() {
   return (
     <section
       id="certificate"
-      className="scroll-mt-32 py-32 px-6 md:px-10 lg:px-16 bg-[#f8fafc] dark:bg-[#111827]"
+      className="relative w-full min-h-screen lg:h-screen flex flex-col justify-center px-6 md:px-10 lg:px-12 xl:px-16 py-8 lg:py-4 overflow-y-auto lg:overflow-hidden bg-[#f8fafc] dark:bg-[#111827] transition-colors"
     >
-      <div className="max-w-7xl mx-auto">
-        {/* TITLE */}
-        <SectionTitle title="My" highlight="Certificates" />
+      <div className="max-w-7xl mx-auto w-full">
+        {/* COMPACT INTEGRATED HEADER */}
+        <div className="flex items-center justify-between gap-4 mb-4 lg:mb-5">
+          <SectionTitle title="My" highlight="Certificates" />
 
-        {/* NAVIGATION */}
-        <div className="flex items-center justify-end gap-4 mt-14 mb-10">
-          <div className="flex items-center gap-4">
+          {/* NAVIGATION */}
+          <div className="flex items-center gap-2">
             {/* PREV */}
             <button
               disabled={isBeginning || totalSlides <= 1}
+              aria-label="Previous certificate"
               className={`
-        certificate-prev
-        relative
-        overflow-hidden
-        w-12 md:w-14
-        h-12 md:h-14
-        rounded-2xl
-        border
-        border-gray-200
-        dark:border-white/10
-        flex
-        items-center
-        justify-center
-        text-lg
-        md:text-xl
-        shadow-lg
-        transition-all
-        duration-300
-        before:absolute
-        before:inset-0
-        before:bg-white/10
-        before:opacity-0
-        before:transition
-        before:duration-300
-        active:before:opacity-100
-        ${
-          isBeginning || totalSlides <= 1
-            ? `
-              bg-gray-100
-              dark:bg-white/5
-              text-gray-400
-              opacity-50
-              cursor-not-allowed
-              pointer-events-none
-            `
-            : `
-              cursor-pointer
-              bg-white
-              dark:bg-white/5
-              text-gray-700
-              dark:text-white
-              hover:bg-[#023E8A]
-              hover:text-white
-              hover:-translate-y-1
-              hover:shadow-2xl
-              hover:shadow-[#023E8A]/30
-              active:scale-90
-              active:bg-[#012f6b]
-            `
-        }
-      `}
+                certificate-prev
+                w-9 h-9 sm:w-10 sm:h-10
+                rounded-xl
+                border border-gray-200 dark:border-white/10
+                flex items-center justify-center
+                text-sm
+                transition-all duration-200
+                ${
+                  isBeginning || totalSlides <= 1
+                    ? "bg-gray-100 dark:bg-white/5 text-gray-400 opacity-50 cursor-not-allowed pointer-events-none"
+                    : "cursor-pointer bg-white dark:bg-white/5 text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white hover:border-[#023E8A] shadow-sm active:scale-95"
+                }
+              `}
             >
-              <FaArrowLeft className="relative z-10 transition-transform duration-200 active:scale-75" />
+              <FaArrowLeft />
             </button>
 
             {/* NEXT */}
             <button
               disabled={isEnd || totalSlides <= 1}
+              aria-label="Next certificate"
               className={`
-        certificate-next
-        relative
-        overflow-hidden
-        w-12 md:w-14
-        h-12 md:h-14
-        rounded-2xl
-        border
-        border-gray-200
-        dark:border-white/10
-        flex
-        items-center
-        justify-center
-        text-lg
-        md:text-xl
-        shadow-lg
-        transition-all
-        duration-300
-        before:absolute
-        before:inset-0
-        before:bg-white/10
-        before:opacity-0
-        before:transition
-        before:duration-300
-        active:before:opacity-100
-        ${
-          isEnd || totalSlides <= 1
-            ? `
-              bg-gray-100
-              dark:bg-white/5
-              text-gray-400
-              opacity-50
-              cursor-not-allowed
-              pointer-events-none
-            `
-            : `
-              cursor-pointer
-              bg-white
-              dark:bg-white/5
-              text-gray-700
-              dark:text-white
-              hover:bg-[#023E8A]
-              hover:text-white
-              hover:-translate-y-1
-              hover:shadow-2xl
-              hover:shadow-[#023E8A]/30
-              active:scale-90
-              active:bg-[#012f6b]
-            `
-        }
-      `}
+                certificate-next
+                w-9 h-9 sm:w-10 sm:h-10
+                rounded-xl
+                border border-gray-200 dark:border-white/10
+                flex items-center justify-center
+                text-sm
+                transition-all duration-200
+                ${
+                  isEnd || totalSlides <= 1
+                    ? "bg-gray-100 dark:bg-white/5 text-gray-400 opacity-50 cursor-not-allowed pointer-events-none"
+                    : "cursor-pointer bg-white dark:bg-white/5 text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white hover:border-[#023E8A] shadow-sm active:scale-95"
+                }
+              `}
             >
-              <FaArrowRight className="relative z-10 transition-transform duration-200 active:scale-75" />
+              <FaArrowRight />
             </button>
           </div>
         </div>
 
         {/* CERTIFICATES SWIPER */}
-        <div className="mt-10">
+        <div className="w-full">
           <Swiper
             modules={[Navigation]}
             navigation={{
@@ -274,13 +202,13 @@ function Certificates() {
               prevEl: ".certificate-prev",
             }}
             loop={false}
-            speed={1000}
-            spaceBetween={30}
+            speed={600}
+            spaceBetween={20}
             onInit={handleSwiperState}
             onSlideChange={handleSwiperState}
             onReachBeginning={(swiper) => handleSwiperState(swiper)}
             onReachEnd={(swiper) => handleSwiperState(swiper)}
-            className="pb-10"
+            className="pb-2"
           >
             {Array.from({
               length: totalSlides,
@@ -292,21 +220,21 @@ function Certificates() {
 
               return (
                 <SwiperSlide key={groupIndex}>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
                     {group.map((certificate, index) => (
                       <motion.div
                         key={index}
                         initial={{
                           opacity: 0,
-                          y: 40,
+                          y: 20,
                         }}
                         whileInView={{
                           opacity: 1,
                           y: 0,
                         }}
                         transition={{
-                          duration: 0.5,
-                          delay: index * 0.05,
+                          duration: 0.4,
+                          delay: index * 0.04,
                         }}
                         viewport={{
                           once: true,
@@ -316,40 +244,42 @@ function Certificates() {
                           group
                           relative
                           overflow-hidden
-                          rounded-3xl
+                          rounded-2xl
                           cursor-pointer
                           bg-white
                           dark:bg-white/5
                           border
                           border-gray-200
                           dark:border-white/10
-                          shadow-lg
-                          hover:-translate-y-2
+                          shadow-sm
+                          hover:shadow-lg
+                          hover:border-[#023E8A]/40
                           transition
-                          duration-500
+                          duration-300
                         "
                       >
                         {/* IMAGE */}
-                        <div className="overflow-hidden">
+                        <div className="overflow-hidden aspect-[16/11] bg-gray-100 dark:bg-black/30">
                           <img
                             src={certificate.images[0]}
                             alt={certificate.title}
-                            className="w-full aspect-[4/3] object-cover group-hover:scale-110 transition duration-700"
+                            loading="lazy"
+                            className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                           />
                         </div>
 
                         {/* OVERLAY */}
-                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center text-center p-4">
-                          <h3 className="text-white font-bold text-sm md:text-lg line-clamp-2">
+                        <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center text-center p-3">
+                          <h3 className="text-white font-bold text-xs sm:text-sm line-clamp-2">
                             {certificate.title}
                           </h3>
 
-                          <p className="text-white/80 text-xs md:text-sm mt-2">
+                          <p className="text-white/80 text-[11px] sm:text-xs mt-1 line-clamp-1">
                             {certificate.issuer}
                           </p>
 
-                          <div className="mt-4 px-4 py-2 rounded-full bg-white text-black text-xs md:text-sm font-semibold">
-                            View Certificate
+                          <div className="mt-2.5 px-3 py-1 rounded-full bg-white text-black text-[11px] font-semibold hover:scale-105 transition">
+                            View
                           </div>
                         </div>
                       </motion.div>

@@ -8,7 +8,7 @@ function Hero({ onNavigate }) {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full overflow-x-hidden overflow-y-hidden bg-[#f8fafc] dark:bg-[#020617]"
+      className="relative min-h-screen lg:h-screen w-full flex flex-col justify-center overflow-x-hidden overflow-y-auto lg:overflow-hidden bg-[#f8fafc] dark:bg-[#020617]"
     >
       {/* OPTIMIZED GPU-FRIENDLY AURORA BACKGROUND */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none select-none" aria-hidden="true">
@@ -91,7 +91,7 @@ function Hero({ onNavigate }) {
       </div>
 
       {/* CONTENT */}
-      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl items-center px-4 pb-24 pt-28 sm:px-6 sm:pt-32 md:px-10 lg:px-16 lg:pb-20">
+      <div className="relative z-10 mx-auto flex min-h-screen lg:min-h-0 w-full max-w-7xl items-center px-4 py-20 lg:py-6 sm:px-6 md:px-10 lg:px-16 my-auto">
         <div className="grid w-full min-w-0 grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
           {/* LEFT CONTENT */}
           <motion.div

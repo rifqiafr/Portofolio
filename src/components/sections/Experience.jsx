@@ -45,89 +45,75 @@ function Experience() {
   return (
     <section
       id="experience"
-      className="relative overflow-hidden py-32 px-6 md:px-10 lg:px-16 bg-white dark:bg-[#0f172a]"
+      className="relative w-full min-h-screen lg:h-screen flex flex-col justify-center px-6 md:px-10 lg:px-12 xl:px-16 py-8 lg:py-0 overflow-y-auto lg:overflow-hidden bg-white dark:bg-[#0f172a] transition-colors"
     >
-      <div className="relative z-10 max-w-7xl mx-auto">
-        {/* TITLE */}
-        <SectionTitle title="My" highlight="Experience" />
+      <div className="relative z-10 max-w-7xl mx-auto w-full my-auto">
+        {/* HEADER ROW WITH TITLE, TABS & NAV CONTROLS */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4 lg:mb-6">
+          <SectionTitle title="My" highlight="Experience" />
 
-        {/* TAB BUTTON */}
-        <div className="flex items-center justify-center gap-5 mt-14 flex-wrap">
-          <button
-            onClick={() => handleTabChange("work")}
-            className={`cursor-pointer flex items-center gap-3 px-7 py-3 rounded-2xl transition duration-300 ${
-              activeTab === "work"
-                ? "bg-[#023E8A] text-white shadow-lg shadow-[#023E8A]/30"
-                : "bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-300"
-            }`}
-          >
-            <FaBriefcase />
-            Pengalaman Kerja
-          </button>
+          <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
+            {/* TAB BUTTON */}
+            <div className="flex items-center p-1 rounded-2xl bg-gray-100 dark:bg-white/5 border border-gray-200/80 dark:border-white/10">
+              <button
+                onClick={() => handleTabChange("work")}
+                className={`cursor-pointer flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition ${
+                  activeTab === "work"
+                    ? "bg-[#023E8A] text-white shadow-md shadow-[#023E8A]/25"
+                    : "text-gray-700 dark:text-gray-300 hover:text-[#023E8A]"
+                }`}
+              >
+                <FaBriefcase className="text-xs" />
+                <span>Kerja</span>
+              </button>
 
-          <button
-            onClick={() => handleTabChange("organization")}
-            className={`cursor-pointer flex items-center gap-3 px-7 py-3 rounded-2xl transition duration-300 ${
-              activeTab === "organization"
-                ? "bg-[#023E8A] text-white shadow-lg shadow-[#023E8A]/30"
-                : "bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-300"
-            }`}
-          >
-            <FaUsers />
-            Organisasi
-          </button>
-        </div>
+              <button
+                onClick={() => handleTabChange("organization")}
+                className={`cursor-pointer flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition ${
+                  activeTab === "organization"
+                    ? "bg-[#023E8A] text-white shadow-md shadow-[#023E8A]/25"
+                    : "text-gray-700 dark:text-gray-300 hover:text-[#023E8A]"
+                }`}
+              >
+                <FaUsers className="text-xs" />
+                <span>Organisasi</span>
+              </button>
+            </div>
 
-        {/* NAVIGATION */}
-        <div className="flex items-center justify-end gap-4 mt-14 mb-10">
-          <div className="flex items-center gap-4">
-            {/* PREV */}
-            <button
-              ref={prevRef}
-              disabled={isBeginning || filteredExperiences.length <= 1}
-              className={`
-                w-12 md:w-14
-                h-12 md:h-14
-                rounded-2xl
-                bg-white dark:bg-white/5
-                border border-gray-200 dark:border-white/10
-                flex items-center justify-center
-                text-lg md:text-xl
-                shadow-lg
-                transition-all duration-200
-                ${
-                  isBeginning || filteredExperiences.length <= 1
-                    ? "text-gray-400 opacity-50 cursor-not-allowed pointer-events-none"
-                    : "cursor-pointer text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#023E8A]/30 active:scale-90 active:bg-[#023E8A] active:text-white"
-                }
-              `}
-            >
-              <FaArrowLeft />
-            </button>
+            {/* NAVIGATION ARROWS */}
+            <div className="flex items-center gap-2">
+              <button
+                ref={prevRef}
+                disabled={isBeginning || filteredExperiences.length <= 1}
+                className={`
+                  w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center text-sm shadow-sm transition
+                  ${
+                    isBeginning || filteredExperiences.length <= 1
+                      ? "text-gray-400 opacity-40 cursor-not-allowed pointer-events-none"
+                      : "cursor-pointer text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white"
+                  }
+                `}
+                aria-label="Slide sebelumnya"
+              >
+                <FaArrowLeft />
+              </button>
 
-            {/* NEXT */}
-            <button
-              ref={nextRef}
-              disabled={isEnd || filteredExperiences.length <= 1}
-              className={`
-                w-12 md:w-14
-                h-12 md:h-14
-                rounded-2xl
-                bg-white dark:bg-white/5
-                border border-gray-200 dark:border-white/10
-                flex items-center justify-center
-                text-lg md:text-xl
-                shadow-lg
-                transition-all duration-200
-                ${
-                  isEnd || filteredExperiences.length <= 1
-                    ? "text-gray-400 opacity-50 cursor-not-allowed pointer-events-none"
-                    : "cursor-pointer text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#023E8A]/30 active:scale-90 active:bg-[#023E8A] active:text-white"
-                }
-              `}
-            >
-              <FaArrowRight />
-            </button>
+              <button
+                ref={nextRef}
+                disabled={isEnd || filteredExperiences.length <= 1}
+                className={`
+                  w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center text-sm shadow-sm transition
+                  ${
+                    isEnd || filteredExperiences.length <= 1
+                      ? "text-gray-400 opacity-40 cursor-not-allowed pointer-events-none"
+                      : "cursor-pointer text-gray-700 dark:text-white hover:bg-[#023E8A] hover:text-white"
+                  }
+                `}
+                aria-label="Slide berikutnya"
+              >
+                <FaArrowRight />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -147,7 +133,7 @@ function Experience() {
             }}
             loop={false}
             speed={1000}
-            spaceBetween={30}
+            spaceBetween={20}
             onInit={handleSwiperState}
             onSlideChange={handleSwiperState}
             onReachBeginning={(swiper) => handleSwiperState(swiper)}
@@ -163,44 +149,44 @@ function Experience() {
                 slidesPerView: 3,
               },
             }}
-            className="pb-10 overflow-hidden"
+            className="pb-2 overflow-hidden"
           >
             {filteredExperiences.map((item, index) => (
               <SwiperSlide key={index} className="!h-auto">
                 <motion.div
                   initial={{
                     opacity: 0,
-                    y: 40,
+                    y: 30,
                   }}
-                  whileInView={{
+                  animate={{
                     opacity: 1,
                     y: 0,
                   }}
                   transition={{
-                    duration: 0.5,
-                    delay: index * 0.08,
-                  }}
-                  viewport={{
-                    once: true,
+                    duration: 0.4,
+                    delay: index * 0.05,
                   }}
                   className="
                     group
                     h-full
                     overflow-hidden
-                    rounded-3xl
+                    rounded-2xl
                     border
-                    border-gray-200
+                    border-gray-200/80
                     dark:border-white/10
                     bg-white
                     dark:bg-white/5
-                    shadow-lg
-                    hover:-translate-y-3
+                    shadow-sm
+                    hover:shadow-xl
+                    hover:-translate-y-1.5
                     transition-all
-                    duration-500
+                    duration-300
+                    flex
+                    flex-col
                   "
                 >
                   {/* IMAGE */}
-                  <div className="relative overflow-hidden">
+                  <div className="relative overflow-hidden aspect-[16/9] max-h-[175px]">
                     <Swiper
                       modules={[Autoplay]}
                       autoplay={{
@@ -210,72 +196,57 @@ function Experience() {
                       loop={item.images?.length > 1}
                       speed={1000}
                       slidesPerView={1}
+                      className="h-full"
                     >
                       {item.images?.map((image, imageIndex) => (
-                        <SwiperSlide key={imageIndex}>
+                        <SwiperSlide key={imageIndex} className="h-full">
                           <img
                             src={image}
                             alt={item.title}
-                            className="w-full aspect-[16/9] object-cover group-hover:scale-110 transition duration-700"
+                            loading="lazy"
+                            decoding="async"
+                            className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                           />
                         </SwiperSlide>
                       ))}
                     </Swiper>
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
                   </div>
 
                   {/* CONTENT */}
-                  <div className="p-5 md:p-7 h-auto md:h-[470px] flex flex-col">
-                    <span className="w-fit px-4 py-1 rounded-full bg-[#023E8A]/10 text-[#023E8A] text-sm font-medium">
-                      {item.year}
-                    </span>
+                  <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <span className="w-fit px-3 py-0.5 rounded-full bg-[#023E8A]/10 text-[#023E8A] dark:text-cyan-400 text-xs font-semibold">
+                        {item.year}
+                      </span>
 
-                    <h3
-                      className="text-xl md:text-2xl font-black mt-5 text-gray-900 dark:text-white leading-snug overflow-hidden"
-                      style={{
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                      }}
-                    >
-                      {item.title}
-                    </h3>
+                      <h3 className="text-base font-bold mt-2.5 text-gray-900 dark:text-white leading-snug line-clamp-1">
+                        {item.title}
+                      </h3>
 
-                    <p className="mt-2 text-[#023E8A] font-semibold truncate">
-                      {item.company}
-                    </p>
+                      <p className="mt-1 text-xs text-[#023E8A] dark:text-cyan-300 font-semibold truncate">
+                        {item.company}
+                      </p>
 
-                    <div className="mt-5 mb-6 h-[112px] overflow-hidden">
-                      <p
-                        className="text-gray-600 dark:text-gray-300 overflow-hidden"
-                        style={{
-                          display: "-webkit-box",
-                          WebkitLineClamp: 3,
-                          WebkitBoxOrient: "vertical",
-                          lineHeight: "1.9rem",
-                          paddingBottom: "8px",
-                        }}
-                      >
+                      <p className="mt-2 text-xs text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed">
                         {item.description}
                       </p>
                     </div>
 
-                    <div className="flex-1" />
-
-                    <div className="pt-3 h-[58px] overflow-hidden">
-                      <div className="flex flex-nowrap gap-2 overflow-hidden">
+                    <div className="pt-3">
+                      <div className="flex flex-nowrap gap-1.5 overflow-hidden">
                         {item.tech?.slice(0, 2).map((tech, techIndex) => (
                           <span
                             key={techIndex}
                             className="
                               shrink-0
-                              px-4
-                              py-2
-                              rounded-full
+                              px-2.5
+                              py-1
+                              rounded-lg
                               bg-gray-100
                               dark:bg-white/5
-                              text-sm
+                              text-[11px]
                               text-gray-700
                               dark:text-gray-300
                               whitespace-nowrap
@@ -286,33 +257,33 @@ function Experience() {
                         ))}
 
                         {item.tech?.length > 2 && (
-                          <span className="shrink-0 px-4 py-2 rounded-full bg-[#023E8A]/10 text-[#023E8A] text-sm font-semibold whitespace-nowrap">
+                          <span className="shrink-0 px-2.5 py-1 rounded-lg bg-[#023E8A]/10 text-[#023E8A] dark:text-cyan-300 text-[11px] font-semibold whitespace-nowrap">
                             +{item.tech.length - 2}
                           </span>
                         )}
                       </div>
-                    </div>
 
-                    <button
-                      onClick={() => setSelectedExperience(item)}
-                      className="
-                        cursor-pointer
-                        mt-6
-                        w-full
-                        py-4
-                        rounded-2xl
-                        bg-[#023E8A]
-                        text-white
-                        font-semibold
-                        transition-all
-                        duration-300
-                        hover:scale-[1.02]
-                        active:scale-95
-                        active:bg-[#012f6b]
-                      "
-                    >
-                      View Details
-                    </button>
+                      <button
+                        onClick={() => setSelectedExperience(item)}
+                        className="
+                          cursor-pointer
+                          mt-3.5
+                          w-full
+                          py-2.5
+                          rounded-xl
+                          bg-[#023E8A]
+                          text-white
+                          text-xs
+                          font-semibold
+                          transition-all
+                          duration-200
+                          hover:bg-[#0353a4]
+                          active:scale-95
+                        "
+                      >
+                        View Details
+                      </button>
+                    </div>
                   </div>
                 </motion.div>
               </SwiperSlide>
