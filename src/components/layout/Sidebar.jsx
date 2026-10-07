@@ -23,7 +23,7 @@ function Sidebar({ activeSection, onNavigate }) {
   const { darkMode, setDarkMode } = useContext(ThemeContext);
 
   const navItems = [
-    { id: "home", label: "Home", icon: FaHome, subtitle: "Beranda & Pengantar" },
+    { id: "home", label: "Home", icon: FaHome, subtitle: "Beranda" },
     { id: "about", label: "About Me", icon: FaUser, subtitle: "Profil & Latar Belakang" },
     { id: "skills", label: "Skills", icon: FaCode, subtitle: "Teknologi & Keahlian" },
     { id: "experience", label: "Experience", icon: FaBriefcase, subtitle: "Pengalaman & Riwayat" },
@@ -189,11 +189,10 @@ function Sidebar({ activeSection, onNavigate }) {
                           key={item.id}
                           type="button"
                           onClick={() => handleItemClick(item.id)}
-                          className={`flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-left text-sm font-medium transition cursor-pointer min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 ${
-                            isActive
-                              ? "bg-[#023E8A] text-white shadow-md shadow-[#023E8A]/25 dark:bg-cyan-500/20 dark:text-cyan-300 dark:border dark:border-cyan-400/30"
-                              : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60"
-                          }`}
+                          className={`flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-left text-sm font-medium transition cursor-pointer min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 ${isActive
+                            ? "bg-[#023E8A] text-white shadow-md shadow-[#023E8A]/25 dark:bg-cyan-500/20 dark:text-cyan-300 dark:border dark:border-cyan-400/30"
+                            : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+                            }`}
                         >
                           <Icon className={`text-base shrink-0 ${isActive ? "text-cyan-300" : "text-slate-500 dark:text-slate-400"}`} />
                           <div className="flex flex-col">
@@ -262,12 +261,11 @@ function Sidebar({ activeSection, onNavigate }) {
               className="group flex flex-col text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded-lg p-1 cursor-pointer"
             >
               <div className="flex items-center gap-1 text-2xl xl:text-3xl font-black text-[#023E8A] dark:text-white transition duration-300 group-hover:scale-[1.02]">
-                <span>KI</span>
-                <span className="text-cyan-500">AF</span>
+                <span>Portfolio</span>
                 <span className="inline-block h-2 w-2 rounded-full bg-cyan-400 ml-0.5 group-hover:scale-125 transition" />
               </div>
               <span className="text-xs font-medium text-slate-500 dark:text-slate-400 tracking-wide mt-0.5">
-                M. Rifqi Afriansyah
+                Muhamad Rifqi Afriansyah
               </span>
             </button>
 
@@ -295,30 +293,27 @@ function Sidebar({ activeSection, onNavigate }) {
                   type="button"
                   onClick={() => handleItemClick(item.id)}
                   aria-current={isActive ? "page" : undefined}
-                  className={`group relative flex items-center justify-between w-full px-3.5 py-2.5 rounded-xl text-left text-sm font-medium transition duration-200 cursor-pointer min-h-[46px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 ${
-                    isActive
-                      ? "bg-[#023E8A] text-white shadow-md shadow-[#023E8A]/25 dark:bg-gradient-to-r dark:from-cyan-500/20 dark:to-blue-600/20 dark:text-cyan-300 dark:border dark:border-cyan-500/30"
-                      : "text-slate-700 dark:text-slate-300 hover:bg-slate-100/90 dark:hover:bg-slate-800/60 hover:text-[#023E8A] dark:hover:text-cyan-300"
-                  }`}
+                  className={`group relative flex items-center justify-between w-full px-3.5 py-2.5 rounded-xl text-left text-sm font-medium transition duration-200 cursor-pointer min-h-[46px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 ${isActive
+                    ? "bg-[#023E8A] text-white shadow-md shadow-[#023E8A]/25 dark:bg-gradient-to-r dark:from-cyan-500/20 dark:to-blue-600/20 dark:text-cyan-300 dark:border dark:border-cyan-500/30"
+                    : "text-slate-700 dark:text-slate-300 hover:bg-slate-100/90 dark:hover:bg-slate-800/60 hover:text-[#023E8A] dark:hover:text-cyan-300"
+                    }`}
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <span
-                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition duration-200 ${
-                        isActive
-                          ? "bg-white/20 text-white dark:bg-cyan-500/30 dark:text-cyan-200"
-                          : "bg-slate-100 text-slate-500 group-hover:bg-white group-hover:text-[#023E8A] dark:bg-slate-800/80 dark:text-slate-400 dark:group-hover:bg-slate-700 dark:group-hover:text-cyan-400"
-                      }`}
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition duration-200 ${isActive
+                        ? "bg-white/20 text-white dark:bg-cyan-500/30 dark:text-cyan-200"
+                        : "bg-slate-100 text-slate-500 group-hover:bg-white group-hover:text-[#023E8A] dark:bg-slate-800/80 dark:text-slate-400 dark:group-hover:bg-slate-700 dark:group-hover:text-cyan-400"
+                        }`}
                     >
                       <Icon className="text-sm" />
                     </span>
                     <div className="flex flex-col min-w-0">
                       <span className="font-semibold truncate">{item.label}</span>
                       <span
-                        className={`text-[10px] truncate ${
-                          isActive
-                            ? "text-cyan-100/90 dark:text-cyan-300/80 font-normal"
-                            : "text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-400"
-                        }`}
+                        className={`text-[10px] truncate ${isActive
+                          ? "text-cyan-100/90 dark:text-cyan-300/80 font-normal"
+                          : "text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-400"
+                          }`}
                       >
                         {item.subtitle}
                       </span>
