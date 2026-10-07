@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 import SectionTitle from "../ui/SectionTitle";
-import kiafImg from "../../assets/images/kiaf.png";
+import kiafImg from "../../assets/images/kiaf.webp";
 
 function About() {
   return (
@@ -26,7 +26,7 @@ function About() {
               <img
                 src={kiafImg}
                 alt="about"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
                 className="relative w-[280px] sm:w-[320px] md:w-[360px] lg:w-[380px] max-h-[380px] rounded-3xl object-cover shadow-2xl"
               />

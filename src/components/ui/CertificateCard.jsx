@@ -11,6 +11,8 @@ function CertificateCard({ certificate, onClick }) {
         <img
           src={certificate.image}
           alt={certificate.title}
+          loading="lazy"
+          decoding="async"
           className="w-full h-[240px] object-cover group-hover:scale-110 transition duration-500"
         />
       </div>

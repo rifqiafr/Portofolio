@@ -274,6 +274,8 @@ function Projects() {
                 <img
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full aspect-[16/9] object-cover group-hover:scale-110 transition duration-700"
                 />
 
@@ -425,6 +427,8 @@ function Projects() {
                 <img
                   src={selectedProject.image}
                   alt={selectedProject.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full aspect-[16/9] object-cover"
                 />
 

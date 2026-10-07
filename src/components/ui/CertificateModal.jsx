@@ -30,6 +30,8 @@ function CertificateModal({
             <img
               src={certificate?.image}
               alt={certificate?.title}
+              loading="lazy"
+              decoding="async"
               className="w-full max-h-[420px] object-contain bg-black"
             />
 
