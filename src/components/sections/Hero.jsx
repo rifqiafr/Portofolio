@@ -4,87 +4,90 @@ import { HiDownload } from "react-icons/hi";
 
 import kii from "../../assets/images/kiaf4.webp";
 
-function Hero() {
+function Hero({ onNavigate }) {
   return (
     <section
       id="home"
       className="relative min-h-screen w-full overflow-x-hidden overflow-y-hidden bg-[#f8fafc] dark:bg-[#020617]"
     >
-      {/* FUTURISTIC AURORA BACKGROUND */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-[#f8fafc] dark:bg-[#020617]" />
+      {/* OPTIMIZED GPU-FRIENDLY AURORA BACKGROUND */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none" aria-hidden="true">
+        {/* Base background color */}
+        <div className="absolute inset-0 bg-[#f8fafc] dark:bg-[#020617] transition-colors" />
 
+        {/* Primary Aurora Glow (Top Left - Cyan) */}
         <motion.div
           animate={{
-            x: [0, 60, 0],
-            y: [0, -40, 0],
-            rotate: [0, 8, 0],
+            scale: [1, 1.08, 1],
+            opacity: [0.65, 0.9, 0.65],
           }}
           transition={{
-            duration: 12,
+            duration: 9,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute -top-32 -left-40 h-[360px] w-[360px] rounded-full bg-cyan-400/20 blur-[100px] sm:-top-40 sm:-left-32 sm:h-[650px] sm:w-[650px] sm:blur-[140px]"
+          className="absolute -top-32 -left-32 sm:-top-40 sm:-left-28 w-[400px] h-[400px] sm:w-[650px] sm:h-[650px] rounded-full bg-[radial-gradient(circle,rgba(34,211,238,0.2)_0%,rgba(34,211,238,0.06)_45%,transparent_70%)] will-change-transform"
         />
 
+        {/* Secondary Aurora Glow (Bottom Right - Deep Navy Blue) */}
         <motion.div
           animate={{
-            x: [0, -50, 0],
-            y: [0, 50, 0],
-            rotate: [0, -10, 0],
+            scale: [1, 1.1, 1],
+            opacity: [0.55, 0.8, 0.55],
           }}
           transition={{
-            duration: 14,
+            duration: 11,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute bottom-[-160px] right-[-180px] h-[390px] w-[390px] rounded-full bg-[#023E8A]/25 blur-[120px] sm:bottom-[-250px] sm:right-[-180px] sm:h-[700px] sm:w-[700px] sm:blur-[160px]"
+          className="absolute -bottom-36 -right-36 sm:-bottom-48 sm:-right-40 w-[420px] h-[420px] sm:w-[700px] sm:h-[700px] rounded-full bg-[radial-gradient(circle,rgba(2,62,138,0.25)_0%,rgba(2,62,138,0.08)_50%,transparent_75%)] will-change-transform"
         />
 
-        <div className="absolute left-1/2 top-1/2 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/20 blur-[90px] dark:bg-cyan-400/[0.05] sm:h-[500px] sm:w-[500px] sm:blur-[120px]" />
+        {/* Center Subtle Highlight */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] sm:w-[500px] sm:h-[500px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.35)_0%,rgba(34,211,238,0.04)_40%,transparent_70%)] dark:bg-[radial-gradient(circle,rgba(34,211,238,0.06)_0%,transparent_70%)]" />
 
+        {/* Grid Overlay */}
         <div
           className="
             absolute inset-0
-            opacity-[0.07]
-            dark:opacity-[0.08]
+            opacity-[0.05]
+            dark:opacity-[0.06]
             bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)]
             dark:bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)]
             bg-[size:48px_48px]
-            sm:bg-[size:80px_80px]
+            sm:bg-[size:72px_72px]
           "
         />
 
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#f8fafc_85%)] dark:bg-[radial-gradient(circle_at_center,transparent_20%,#020617_85%)]" />
+        {/* Vignette mask */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_25%,#f8fafc_90%)] dark:bg-[radial-gradient(circle_at_center,transparent_25%,#020617_90%)]" />
 
+        {/* Floating accent particles */}
         <motion.div
           animate={{
-            y: [0, -20, 0],
-            opacity: [0.4, 1, 0.4],
+            y: [0, -15, 0],
+            opacity: [0.35, 0.85, 0.35],
           }}
           transition={{
-            duration: 5,
+            duration: 4.5,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute right-[10%] top-[14%] h-3.5 w-3.5 rounded-full bg-cyan-400 shadow-[0_0_30px_rgba(34,211,238,0.8)] sm:right-[20%] sm:top-[18%] sm:h-5 sm:w-5"
+          className="absolute right-[10%] top-[14%] h-3.5 w-3.5 rounded-full bg-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.8)] sm:right-[18%] sm:top-[18%] sm:h-5 sm:w-5 will-change-transform"
         />
 
         <motion.div
           animate={{
-            y: [0, 20, 0],
-            opacity: [0.3, 0.8, 0.3],
+            y: [0, 15, 0],
+            opacity: [0.3, 0.75, 0.3],
           }}
           transition={{
-            duration: 6,
+            duration: 5.5,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute bottom-[18%] left-[8%] h-3 w-3 rounded-full bg-[#023E8A] shadow-[0_0_30px_rgba(2,62,138,0.8)] sm:bottom-[20%] sm:left-[15%] sm:h-4 sm:w-4"
+          className="absolute bottom-[18%] left-[8%] h-3 w-3 rounded-full bg-[#023E8A] shadow-[0_0_20px_rgba(2,62,138,0.8)] sm:bottom-[20%] sm:left-[14%] sm:h-4 sm:w-4 will-change-transform"
         />
-
-        <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/noise.png')]" />
       </div>
 
       {/* CONTENT */}
@@ -180,7 +183,7 @@ function Hero() {
                   whileHover={{
                     y: -6,
                   }}
-                  className="relative rounded-[28px] border border-white/40 bg-white/70 p-2.5 shadow-[0_20px_80px_rgba(2,62,138,0.25)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/[0.05] sm:rounded-[32px] sm:p-3"
+                  className="relative rounded-[28px] border border-white/40 bg-white/70 p-2.5 shadow-xl shadow-[#023E8A]/15 backdrop-blur-md dark:border-white/10 dark:bg-white/[0.05] sm:rounded-[32px] sm:p-3"
                 >
                   <div className="flex items-center gap-2 px-3 py-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
@@ -192,6 +195,8 @@ function Hero() {
                     <img
                       src={kii}
                       alt="profile"
+                      loading="eager"
+                      decoding="async"
                       className="w-full rounded-[22px] object-cover transition duration-700 group-hover:scale-105 sm:rounded-[24px]"
                     />
 
@@ -286,6 +291,12 @@ function Hero() {
             >
               <a
                 href="#contact"
+                onClick={(e) => {
+                  if (onNavigate) {
+                    e.preventDefault();
+                    onNavigate("contact");
+                  }
+                }}
                 className="w-full cursor-pointer rounded-2xl bg-[#023E8A] px-8 py-4 text-center font-semibold text-white transition duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#023E8A]/30 sm:w-auto"
               >
                 Contact Me
@@ -358,7 +369,7 @@ function Hero() {
                 whileHover={{
                   y: -10,
                 }}
-                className="relative rounded-[40px] border border-white/40 bg-white/70 p-4 shadow-[0_20px_80px_rgba(2,62,138,0.25)] backdrop-blur-2xl dark:border-white/10 dark:bg-white/[0.05]"
+                className="relative rounded-[40px] border border-white/40 bg-white/70 p-4 shadow-xl shadow-[#023E8A]/15 backdrop-blur-md dark:border-white/10 dark:bg-white/[0.05]"
               >
                 <div className="flex items-center gap-2 px-3 py-2">
                   <span className="h-3 w-3 rounded-full bg-red-400" />
@@ -370,6 +381,8 @@ function Hero() {
                   <img
                     src={kii}
                     alt="profile"
+                    loading="eager"
+                    decoding="async"
                     className="w-[340px] rounded-[28px] object-cover transition duration-700 group-hover:scale-105 xl:w-[420px]"
                   />
 
@@ -384,6 +397,13 @@ function Hero() {
       {/* SCROLL DOWN */}
       <motion.a
         href="#about"
+        onClick={(e) => {
+          if (onNavigate) {
+            e.preventDefault();
+            onNavigate("about");
+          }
+        }}
+        aria-label="Buka bagian Tentang Saya"
         animate={{
           y: [0, 10, 0],
         }}

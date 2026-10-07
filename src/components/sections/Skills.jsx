@@ -2,11 +2,7 @@
 
 import { motion } from "framer-motion";
 
-import {
-  FaCode,
-  FaPalette,
-  FaBrain,
-} from "react-icons/fa";
+
 
 import SectionTitle from "../ui/SectionTitle";
 

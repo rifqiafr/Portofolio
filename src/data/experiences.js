@@ -287,7 +287,6 @@ const experiences = [
       "/Mostaneer/Most2.webp",
       "/Mostaneer/Most3.webp",
       "/Mostaneer/Most4.webp",
-      "/Mostaneer/Most5.webp",
     ],
   },
 
@@ -314,13 +313,13 @@ const experiences = [
     ],
 
     images: [
-      "/Himatif/Hima.webp",
+      "/Himatif/hima.webp",
       "/Himatif/Hima3.webp",
       "/Himatif/Hima9.webp",
       "/Himatif/Hima7.webp",
       "/Himatif/Hima6.webp",
       "/Himatif/Hima5.webp",
-      "/Himatif/Hima2.webp",
+      "/Himatif/hima2.webp",
       "/Himatif/Hima4.webp",
       "/Himatif/Hima8.webp",
     ],

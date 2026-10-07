@@ -138,8 +138,8 @@ function Experience() {
             modules={[Navigation]}
             slidesPerView={1}
             navigation={{
-              prevEl: prevRef.current,
-              nextEl: nextRef.current,
+              prevEl: null,
+              nextEl: null,
             }}
             onBeforeInit={(swiper) => {
               swiper.params.navigation.prevEl = prevRef.current;
